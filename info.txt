@@ -1,0 +1,51 @@
+//we have two app indexApp (indexHomeApp.js) and var supportApp = angular.module(ecareApp) in(ecareApp.js)
+
+
+In the esupport index.jsp we have this backend var checking for auth and unauth and based on it we include different views(jsp) i.e indexhome & indexauth
+//<html lang="en" ng-app="indexApp" ng-controller="indexController" class="branding">(earlier this was done now no significance - partial html - indexBody.js & indexProfileController as controller)
+
+ <c:when test="${v_isAuthenticated == true}">
+	    	   <dsp:include page="common/desktop/views/indexAuthView.jsp"></dsp:include>
+	    	
+	    </c:when>
+	    <c:otherwise>
+	      <dsp:include page="common/desktop/views/indexHomeView.jsp"></dsp:include>
+		  
+indexController is in indexHomeApp.js - check if auth, gives returnURL
+										if url.indexOf('product=')>-1 then put servicename
+
+Now - indexhomeview has the landing container(onclick href ?product= that will again open the same page) & unauth service landing page( main landing page onclick href main.html )
+
+main.html
+<html lang="en" ng-app="eCareApp" class="branding">
+	<div ui-view="body" class="mainLanding"></div>
+
+url - main.html#!/directv or main.html#!/directv/topic_account
+that is /:serviceID or /:serviceID/:topicCD in router
+
+kms call functions will be resolved, ,like getKMStopicData getTopicInfo
+templateUrl : main/desktop/views/mainBody.html
+controller: mainLandingController
+
+indexAuthView.jsp
+- ng-include ="'common/auth/views/desktop/profile.html'
+shows the main landing page after authentication
+<div id="authHomepage" ng-controller="indexProfileController as profCtrl">
+
+In profile.html ecare tiles with plans are displayed controller is indexProfileController. on plan click directed to the mysupport.jsp
+indexProfileController
+authPlanDetailCall call getting resolved and plans are displayed
+
+mysupport.jsp
+<html lang="en" ng-app="eCareApp" class="branding">
+
+<div class="mainLoading"></div>
+	<div ng-if="isAuth" ui-view="profile" class="mainLanding"></div>
+	<div ng-if="isAuth" ui-view="authenticatedBody" class="mainLanding"></div>
+	<div ng-if="!isAuth"  ui-view="body" class="mainLanding"></div>
+
+in esupport-router.js	
+when url : '/:serviceID'
+
+profile 				/accountLanding.html	profileController as profCtrl
+authenticatedBody		/mainBodyAuth.html		mainLandingController
