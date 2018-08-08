@@ -1,0 +1,263 @@
+Design pattern 
+
+Creational -  patterns deal with object creation mechanisms which optimize object creation compared to a basic approach.
+
+Constructor pattern - JavaScript doesn’t support native classes, but it does support constructors through the use of a “new” keyword prefixed to a function call. This way, we can use the function as a constructor and initialize its properties the same way we would with a classic language constructor.
+avaScript uses prototype-based inheritance. The problem with the previous approach is that the method gets redefined for each of the instances of the constructor. We can avoid this by setting the method into the function prototype
+
+Prototype pattern - 
+
+Inheritance between objects is implemented using prototype-based programming.
+
+It enables us to create objects which can serve as a prototype for other objects being created.
+
+var personPrototype = {
+    sayHi: function() {
+        console.log("Hello, my name is " + this.name + ", and I am " + this.age);
+    },
+    sayBye: function() {
+        console.log("Bye Bye!");
+    }
+};
+
+function Person(name, age) {
+    name = name || "John Doe";
+    age = age || 26;
+
+    function constructorFunction(name, age) {
+        this.name = name;
+        this.age = age;
+    };
+
+    constructorFunction.prototype = personPrototype;
+
+    var instance = new constructorFunction(name, age);
+    return instance;
+}
+
+var person1 = Person();
+var person2 = Person("Bob", 38);
+
+// prints out Hello, my name is John Doe, and I am 26
+person1.sayHi();
+
+
+
+Module pattern - 
+
+
+A closure is a function with access to the parent scope, even after the parent function has closed. 
+
+var counterIncrementer = (function() {
+    var counter = 0;
+
+    return function() {
+        return ++counter;
+    };
+})();
+
+// prints out 1
+console.log(counterIncrementer());
+// prints out 2
+console.log(counterIncrementer());
+// prints out 3
+console.log(counterIncrementer());
+
+By using the IIFE, we have tied the counter variable to a function which was invoked and closed but can still be accessed by the child function that increments it. Since we cannot access the counter variable from outside of the function expression, we made it private through scoping manipulation.
+Using the closures, we can create objects with private and public parts. These are called modules and are very useful whenever we want to hide certain parts of an object and only expose an interface
+
+var collection = (function() {
+    // private members
+    var objects = [];
+
+    // public members
+    return {
+        addObject: function(object) {
+            objects.push(object);
+        }
+    };
+})();
+
+In module pattern , we write the entire object logic in the private scope of the module and then simply expose the parts we want to be public by returning an anonymous object
+
+Singleton pattern - used in scenarios when we need exactly one instance of a class. 
+ access point for retrieving the singleton value needs to be only one and very well known. 
+ 
+ var singleton = (function() {
+    // private singleton value which gets initialized only once
+    var config;
+
+    function initializeConfiguration(values){
+        this.randomNumber = Math.random();
+        values = values || {};
+        this.number = values.number || 5;
+        this.size = values.size || 10;
+    }
+
+    // we export the centralized method for retrieving the singleton value
+    return {
+        getConfig: function(values) {
+            // we initialize the singleton value only once
+            if (config === undefined) {
+                config = new initializeConfiguration(values);
+            }
+
+            // and return the same config value wherever it is asked for
+            return config;
+        }
+    };
+})();
+
+var configObject = singleton.getConfig({ "size": 8 });
+// prints number: 5, size: 8, randomNumber: someRandomDecimalValue
+console.log(configObject);
+var configObject1 = singleton.getConfig({ "number": 8 });
+// prints number: 5, size: 8, randomNumber: same randomDecimalValue as in first config
+console.log(configObject1);
+
+Builder Pattern - 
+
+allows us to construct objects by only specifying the type and the content of the object. We don't have to explicitly create the object.
+Used in jquery
+
+var myDiv = $('<div id="myDiv">This is a div.</div>');
+ 
+//myDiv now represents a jQuery object referencing a DOM node.
+ 
+var someText = $('<p/>');
+//someText is a jQuery object referencing an HTMLParagraphElement
+ 
+var input = $('<input />');
+
+
+The result of all three were the same: we were returned a jQuery object referencing a DOM node. $ variable adopts the Builder Pattern in jQuery.
+we were returned a jQuery DOM object and had access to all the methods provided by the jQuery library, but at no point did we explicitly call document.createElement.
+how much work it would be if we had to explicitly create the DOM element and insert content into it! By leveraging the builder pattern, we're able to focus on the type and the content of the object, rather than explicit creation of it.
+
+
+Factory Pattern - Factories encapsulate and separate object creation from the rest of your code. Define an interface for creating an object, but let subclasses decide which class to instantiate.
+In situations where the creation of an object can be complex or subject to change a factory can act as a nice buffer to help keep things tidy
+
+Factory Method pattern is used to allow a vehiclefactory to define many subclasses such as car, truck. Each subclass overrides createVehicle and returns its own particular style of vehicle (ie: a car or truck). The main take away is that there is only one method, createVehicle, that does anything. By subclassing and overriding this method we can offer aditional flexibility beyond what's possible with the Simple Factory.
+
+function Car( options ) {
+ 
+  // some defaults
+  this.doors = options.doors || 4;
+  this.state = options.state || "brand new";
+  this.color = options.color || "silver";
+ 
+}
+ 
+// A constructor for defining new trucks
+function Truck( options){
+ 
+  this.state = options.state || "used";
+  this.wheelSize = options.wheelSize || "large";
+  this.color = options.color || "blue";
+}
+ 
+ 
+// FactoryExample.js
+ 
+// Define a skeleton vehicle factory
+function VehicleFactory() {}
+ 
+// Define the prototypes and utilities for this factory
+ 
+// Our default vehicleClass is Car
+VehicleFactory.prototype.vehicleClass = Car;
+ 
+// Our Factory method for creating new Vehicle instances
+VehicleFactory.prototype.createVehicle = function ( options ) {
+ 
+  switch(options.vehicleType){
+    case "car":
+      this.vehicleClass = Car;
+      break;
+    case "truck":
+      this.vehicleClass = Truck;
+      break;
+    //defaults to VehicleFactory.prototype.vehicleClass (Car)
+  }
+ 
+  return new this.vehicleClass( options );
+ 
+};
+ 
+// Create an instance of our factory that makes cars
+var carFactory = new VehicleFactory();
+var car = carFactory.createVehicle( {
+            vehicleType: "car",
+            color: "yellow",
+            doors: 6 } );
+ 
+Structural design pattern - These patterns deal with object relationships. They ensure that if one part of a system changes, the entire system doesn’t need to change along with it. 
+
+composite patterns - that a group of objects can be treated in the same manner as an individual object of the group.
+In jQuery, when we're applying methods to an element or collection of elements, we can treat both sets in a uniform manner as both selections return a jQuery object.
+
+This is demonstrated by the code sample using the jQuery selector below. Here it's possible to add an active class to both selections for a single element (e.g an element with a unique ID) or a group of elements with the same tag name or class, without additional effort
+// Single elements
+$( "#singleItem" ).addClass( "active" );
+$( "#container" ).addClass( "active" );
+ 
+// Collections of elements
+$( "div" ).addClass( "active" );
+$( ".item" ).addClass( "active" );
+
+
+Facade pattern -- The facade pattern is used when we want to create an abstraction layer between what is shown publicly and what is implemented behind the curtain.
+provides the user with a simple interface, while hiding it's underlying complexity.
+The ready() method actually implements a facade
+$(document).ready(function() {
+ 
+    //all your code goes here...
+ 
+});
+Under the hood, the ready() method is not all that simple.
+
+Behavoiural pattern - patterns prescribe different methods of organizing the communication between objects.
+
+Observer Pattern- 
+a subject can have a list of observers that are interested in it's lifecycle. Anytime the subject does something interesting, it sends a notification to its observers. If an observer is no longer interested in listening to the subject, the subject can remove it from its list.
+publish(data): Called by the subject when it has a notification to make. Some data may be passed by this method.
+subscribe(observer): Called by the subject to add an observer to its list of observers.
+unsubscribe(observer): Called by the subject to remove an observer from its list of observers.
+
+The observer pattern can become problematic if there are too many subjects and observers involved. This can happen in large-scale systems, and the next pattern we look at tries to solve this problem.
+
+//and those prescribed by the Observer Pattern but you don't have to.
+var o = $( {} );
+$.subscribe = o.on.bind(o);
+$.unsubscribe = o.off.bind(o);
+$.publish = o.trigger.bind(o);
+ 
+// Usage
+document.on( 'tweetsReceived', function(tweets) {
+    //perform some actions, then fire an event
+ 
+    $.publish('tweetsShow', tweets);
+});
+ 
+//We can subscribe to this event and then fire our own event.
+$.subscribe( 'tweetsShow', function() {
+    //display the tweets somehow
+    ..
+ 
+    //publish an action after they are shown.
+    $.publish('tweetsDisplayed);
+});
+ 
+$.subscribe('tweetsDisplayed, function() {
+    ...
+});
+
+Mediator Pattern- The Mediator Pattern promotes the use of a single shared subject that handles communication with multiple objects. All objects communicate with each other through the mediator.
+
+ 
+ 
+ 
+ 
+ 
+ 
