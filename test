@@ -112,6 +112,51 @@ testPopulateProfileItemFromIUCLPAccountForUverse
  //assertTrue(testObj.fillProfileItemFromIUCLPAccount(profItem,accntsBean).equals(AccountType.UVERSE));
  //assertFalse(testObj.isIUCLPAccountAuthenticated(accntsBean));
  
- 
+ Black box testing is the Software testing method which is used to test the software without knowing the internal structure of code or program. 
+White box testing is the software testing method in which internal structure is being known to tester who is going to test the software.
+Regression - Testing an application as a whole for the modification in any module or functionality is termed as Regression Testing. 
+Sanity Testing is done to determine if a new software version is performing well enough to accept it for a major testing effort or not
+Security Testing is done to check how the software or application or website is secure from internal and external threats
+Smoke Testing checks that no show stopper defect exists in the build which will prevent the testing team to test the application in detail. Whenever a new build is provided by the development team then the software testing team validates the build and ensures that no major issue exists. 
+
+Selenium Suite Of Tools
+Selenium RC (Remote control)
+Selenium IDE
+Selenium Grid
+Selenium WebDriver
+
+Selenium Core hit a roadblock in terms of cross-domain testing because of the same origin policy.To overcome the same origin policy issue, testers needed to install local copies of both Selenium Core (a JavaScript program) and the web server containing the web application being tested so they would belong to the same domain.
+RC overcame the problem by involving an HTTP proxy server to “trick” the browser into believing that Selenium Core and the web application being tested come from the same domain.
+
+Selenium IDE is a Firefox plugin which is used to quickly and frequently, record and execute test cases. 
+Selenium Grid was a part of Selenium v1 and it was used in combination with RC to run tests on remote machines.
+
+Selenium WebDriver provides a programming interface to create and execute test cases.
+
+WebDriver is an upgrade to RC because it is much faster. It is faster because it makes direct calls to the browser. RC on the other hand needs an RC server to interact with the web browser. Each browser has its own driver on which the application runs
+
+XPath is used to locate a web element based on its XML path. 
+Single Slash “/” – Single slash is used to create Xpath with absolute path i.e. the xpath would be created to start selection from the document node/start node.
+Double Slash “//” – Double slash is used to create Xpath with relative path i.e. the xpath would be created to start selection from anywhere within the document.
+
+LinkText: it returns elements with an exact match of the given text
+PartialLinkText returns elements which include the given text
+
+The explicit wait is used to tell the Web Driver to wait for certain conditions (Expected Conditions) or the maximum time exceeded before throwing an "ElementNotVisibleException" exception.
+explicit wait: thread.sleep not recommended , 
+The implicit wait will tell to the web driver to wait for certain amount of time before it throws a "No Such Element Exception".
+implicit wait : driver.sleep, 
+
+
+Selenium framework 
+Selenium framework is a code structure for making code maintenance simpler, and code readability better. A framework involves breaking the entire code into smaller pieces of code, which test a particular functionality.
+Benefits of Selenium framework
+
+Increased code reusage
+Improved code readability
+Higher portability
+Reduced script maintenance
+
+Selenium is the most popular browser automation tool. 
 
 	
