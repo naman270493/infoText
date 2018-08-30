@@ -1,0 +1,117 @@
+const webdriver = require('selenium-webdriver');
+var assert = require('assert');
+	var by = webdriver.By;
+	const _ = require('lodash');
+	const prettyMs = require('pretty-ms');
+	const loadtest = require('loadtest');
+	var performance = require('performance-now');
+	const test = require('selenium-webdriver/testing');
+	var http = require('http');
+var driver = config.getWebDriverDesktop(config.driverName);
+
+//match the data with string 
+waitForElement(driver,'xpath',testpath);
+		    driver.findElement(by.xpath(testpath)).getText().then(function (text) {
+    		 assert.equal(text,testData);
+				done();
+			});   
+//check if text is present in className specified			
+waitForElement(driver,'className',testpath);  
+		    driver.findElement(by.className(testpath)).getText().then(function (text) {
+	    		 assert.equal(text.length>0,true);
+					done();
+				});
+//Li count				
+waitForElement(driver,'className',testpath);
+
+	    driver.findElement(by.className(testpath)).findElements(by.tagName('li')).then(function(elements){        		 
+			
+			assert.equal(elements.length,count);
+			done();
+		});		
+//click the className
+
+driver.findElement(by.className(testpath)).click()
+		.then(function() {
+			console.log("clicked successfully");
+			done();
+		});	
+
+//for authentication
+driver.findElement(by.className(testpath)).sendKeys(data);
+
+//is not displayed
+waitForElement(driver,'className',testpath);
+		driver.findElement(by.className(testpath)).isDisplayed().then(function(text) {               
+			assert.equal(text, false);
+			done();		
+			
+//partial link click
+waitForElement(driver,'partialLinkText',testpath);
+		driver.findElement(by.partialLinkText(testpath)).click()
+		.then(function() {
+			console.log("clicked successfully");
+			done();
+//get current url
+   driver.getCurrentUrl().then(function(url) {
+		   
+            assert.equal(url.indexOf(text)>=-1, true);
+            done();
+        });
+
+//get url 
+driver.get(url).then(function () {
+	    	driver.sleep(10000);
+			invoke.isDisplayed(driver,testSuitToValidate.sundayskyVideo,done);
+	    	
+	    	});
+//navigate to url - u can use only one getURl else u have to navigate
+driver.navigate().to(url);
+invoke.ClickEventPartialLink(driver,"View all myAT&T account results",done); 
+
+isEnabled()
+getAttribute("src")
+isDisplayed()
+
+
+??JUnit
+
+ public AccountType fillProfileItemFromIUCLPAccount(MutableRepositoryItem lProfAccItem, AccountsBean iuclpAccnt) {
+		AccountType accountType = iuclpAccnt.getAccountType();
+		lProfAccItem.setPropertyValue(EsupportProfileConstants.PROPERTY_ACCOUNT_TYPE_LOB, iuclpAccnt.getAccountType().name());
+		
+		switch (accountType) {
+        case UVERSE:
+		  UverseAccountBean uverseAccountBean = iuclpAccnt.getUverseAccount();
+		  //set property in lProfAccItem
+		case Titan:
+			TitanAccountInfoBean  titanAccountBean = iuclpAccnt.getTitanAccount();
+			 //set property in lProfAccItem
+		 }  
+		   return accountType;
+}		 
+
+
+Test methods
+testPopulateProfileItemFromIUCLPAccountWhenAccountTypeIsNull(){
+		when(accntsBean.getUverseAccount()).thenReturn(uverseBean);
+          when(accntsBean.getAccountType()).thenReturn(null);
+          when(uverseBean.getAccountStatus()).thenReturn("P");
+          when(uverseBean.getBillingFullName()).thenReturn(COMPANY_NAME);
+          assertThat(testObj.fillProfileItemFromIUCLPAccount(profItem, accntsBean)).isNull();
+
+}
+
+testPopulateProfileItemFromIUCLPAccountForUverse
+	 when(accntsBean.getUverseAccount()).thenReturn(uverseBean);
+                when(accntsBean.getAccountType()).thenReturn(AccountType.UVERSE);
+                when(uverseBean.getBillingFullName()).thenReturn(COMPANY_NAME);
+                when(uverseBean.getAccountStatus()).thenReturn("P");
+                assertThat(testObj.fillProfileItemFromIUCLPAccount(profItem, accntsBean)).isEqualTo(AccountType.UVERSE);
+}
+ //assertTrue(testObj.fillProfileItemFromIUCLPAccount(profItem,accntsBean).equals(AccountType.UVERSE));
+ //assertFalse(testObj.isIUCLPAccountAuthenticated(accntsBean));
+ 
+ 
+
+	
