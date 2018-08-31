@@ -159,4 +159,160 @@ Reduced script maintenance
 
 Selenium is the most popular browser automation tool. 
 
+navigate().refresh() – This command lets the user to refresh the current web page there by reloading all the web elements.
+navigate().back() – The above command requires no parameters and takes back the user to the previous webpage in the web browser’s history
+
+inline frame acronym as iframe is used to insert another document within the current HTML document
+
+The same-origin policy restricts how a document or script loaded from one origin can interact with a resource from another origin
+
+
+
+Select iframe by id
+driver.switchTo().frame(Id);
+
+Locating iframe using tagName
+driver.switchTo().frame(driver.findElements(By.tagName(“iframe”).get(0));
+
+Locating iframe using index
+
+frame(index)
+driver.switchTo().frame(0);
+
+frame(Name of Frame)
+driver.switchTo().frame(“name of the frame”);
+
+frame(WebElement element)
+Select Parent Window
+driver.switchTo().defaultContent();
+
+//wauit till 
+waitForElement(driver,'className',testpath);  
+		    driver.findElement(by.className(testpath)).getText().then(function (text) {
+	    		 assert.equal(text.length>0,true);
+					done();
+				});   
+findElement(): findElement() is used to find the first element in the current web page matching to the specified locator value. 
+findElements() is used to find all the elements in the current web page matching to the specified locator value.
+ 
+ WebDriver’s close() method closes the web browser window that the user is currently working 
+ quit() method closes down all the windows that the program has opened.
+
+//how to take a screenshot
+
+driver.takeScreenshot().then(
+    function(image, err) {
+        require('fs').writeFile('out.png', image, 'base64', function(err) {
+            console.log(err);
+        });
+    }
+);
+To include the File System module, use the require('fs') method
+use for the File System module:
+
+Read files - .readFile
+Create files - .writeFile
+Update files
+Delete files
+Rename files
+(1) reading an image file and, (2) sending that buffer to the writeFile function, and (3) specifying the output to ‘binary’
+
+
+//in java
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import java.io.File;
+import java.io.IOException;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+public class CaptureScreenshot {
+WebDriver driver;
+@Before
+public void setUp() throws Exception {
+driver = new FirefoxDriver();
+driver.get("https://google.com");
+}
+@After
+public void tearDown() throws Exception {
+driver.quit();
+}
+
+@Test
+public void test() throws IOException {
+// Code to capture the screenshot
+File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+// Code to copy the screenshot in the desired location
+FileUtils.copyFile(scrFile, new File("C:\\CaptureScreenshot\\google.jpg"))
+}
+}
+
+installation
+node install
+download chromedriver and add in path
+npm install selenium-webdriver
+
+//mocha chai
+Mocha and Chai are two JavaScript frameworks commonly used together for unit testing.
+
+Mocha is a testing framework that provides functions that are executed according in a specific order, and that logs their results to the terminal window.
+
+When you read tests written in Mocha, you’ll see regular use of the keywords describe and it
+The base component of test cases are assertions. Chai is an assertion library that is often used alongside Mocha. It provides functions and methods that help you compare the output of a certain test with its expected value. 
+
+//docker- Docker can be termed as a container.By using Docker containers you can setup and package up a software application with all of the contents that are required to build that application, such as databases, libraries, and other dependencies, and finally, you can ship them all out as one package.
+
+ jenkins- Jenkins is a self-contained, open source automation server which can be used to automate all sorts of tasks related to building, testing, and delivering or deploying software
+				
+TestNG is an advanced framework designed in a way to leverage the benefits by both the developers and testers. 
+There are various advantages that make TestNG superior to JUnit. 
+
+Added advance and easy annotations
+Execution patterns can set
+Concurrent execution of test scripts
+Test case dependencies can be set			
+
+//Framework types
+Module Based Testing Framework: The framework divides the entire “Application Under Test” into the number of logical and isolated modules.
+Data Driven Testing Framework helps the user segregate the test script logic and the test data from each other. It lets the user store the test data into an external database. The data is conventionally stored in “Key-Value” pairs
+The Keyword Driven testing framework not only segregates the test data from the scripts, it also keeps the certain set of code belonging to the test script into an external data file.
+Behavior Driven Development framework allows automation of functional validations in easily readable and understandable format to Business Analysts, Developers, Testers, etc.
+
+WebDriver cannot test Mobile applications. WebDriver is a web-based testing tool, therefore applications on the mobile browsers can be tested.
+No, captcha and barcode reader cannot be automated.
+
+//Java
+Exceptions in Selenium are similar to exceptions in other programming languages.
+TimeoutException: This exception is thrown when a command performing an operation does not complete in the stipulated time
+NoSuchElementException: This exception is thrown when an element with given attributes is not found on the web page
+ElementNotVisibleException: This exception is thrown when the element is present in DOM (Document Object Model), but not visible on the web page
+StaleElementException: This exception is thrown when the element is either deleted or no longer attached to the DOM
+
+An exception test is an exception that you expect will be thrown inside a test class. If you have written a test case in such way that it should throw an exception, then you can use the @Test annotation and specify which exception you will be expecting by mentioning it in the parameters. Take a look at the example below: @Test(expectedException = NoSuchElementException.class)
+
+Page Object Model is a design pattern for creating an Object Repository for web UI elements. Each web page in the application is required to have it’s own corresponding page class. The page class is thus responsible for finding the WebElements in that page and then perform operations on those WebElements.
+
+we hold onto those keys and click other buttons to achieve the special functionality. So it is not enough just to specify keys.ALT or keys.SHIFT or keys.CONTROL functions.
+scrollTop scrollBottom
+
+//open a new tab in selenium 
+driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL +"t");
+
+//resize windows of selelnium 
+driver.manage().window().setSize(x, y);
+//find broken links on page
+2xx – OK
+3xx – Redirection
+4xx – Resource not found
+5xx – Server error
+
+var http = require('http');
+var url= driver.findElements(By.tagName("a"));
+getAttribute("href");
+http.get(url).then(function(response){ return response;})
+
 	
