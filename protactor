@@ -1,0 +1,280 @@
+Protractor is a NodeJS program which is written in JavaScript and runs with Node to identify the web elements in AngularJS applications, and it also uses WebDriver to control the browser with user actions.
+
+Why can't we find Angular JS web elements using Normal Selenium Web driver?
+
+Angular JS applications have some extra HTML attributes like ng-repeater, ng-controller, ng-model.., etc. which are not included in Selenium locators. Selenium is not able to identify those web elements using Selenium code. So, Protractor on the top of Selenium can handle and controls those attributes in Web Applications.
+
+The protractor is an end to end testing framework for Angular JS based applications
+
+config file helps protractor to where the test files are placed/ which browser to pick/which framework to use (Jasmine/Mocha)/where to talk to your Selenium browser and other configurations. 
+spec file are test files
+Protractor supports Jasmine reporters to generate test reports.
+
+here u use
+
+selenium - driver.findElement(by.id(abc)).getText()
+			driver.get('https://angularjs.org');
+			assert
+			assert.equal
+			describe/it
+protactor - element(by.xpath(abc)).getText()
+			browser.get('https://angularjs.org');
+			expect ().toBe
+					 .toEqual
+			describe/it
+
+Features
+WaitForAngular
+Instruct WebDriver to wait until Angular has finished rendering and has no outstanding $http or $timeout calls before continuing. Note that Protractor automatically applies this command before every WebDriver action
+There is no need to manually add waits to your script and Protractor will automatically wait for the web elements to load and only then executes the next steps
+
+New locators - 
+By.binding, 
+By.repeater, - Find elements inside an ng-repeat.
+
+//View1
+<div ng-repeat="cat in pets">
+  <span>{{cat.name}}</span>
+  <span>{{cat.age}}</span>
+</div>
+
+//Test
+// Returns the DIV for the second cat.
+var secondCat = element(by.repeater('cat in pets').row(1));
+
+// Returns the SPAN for the first cat's name.
+var firstCatName = element(by.repeater('cat in pets').
+    row(0).column('cat.name'));
+
+// Returns a promise that resolves to an array of WebElements from a column
+var ages = element.all(
+    by.repeater('cat in pets').column('cat.age'));
+
+// Returns a promise that resolves to an array of WebElements containing
+// all top level elements repeated by the repeater. For 2 pets rows
+// resolves to an array of 2 elements.
+var rows = element.all(by.repeater('cat in pets'));
+
+
+
+//View2
+
+<div class="book-img" ng-repeat-start="book in library">
+  <span>{{$index}}</span>
+</div>
+<div class="book-info" ng-repeat-end>
+  <h4>{{book.name}}</h4>
+  <p>{{book.blurb}}</p>
+</div>
+
+//Test
+
+// Returns a promise that resolves to an array of WebElements containing
+// all the elements with a binding to the book's name.
+var divs = element.all(by.repeater('book in library').column('book.name'));
+
+// Returns a promise that resolves to an array of WebElements containing
+// the DIVs for the second book.
+var bookInfo = element.all(by.repeater('book in library').row(1));
+
+// Returns the H4 for the first book's name.
+var firstBookName = element(by.repeater('book in library').
+    row(0).column('book.name'));
+
+// Returns a promise that resolves to an array of WebElements containing
+// all top level elements repeated by the repeater. For 2 books divs
+// resolves to an array of 4 elements.
+var divs = element.all(by.repeater('book in library'));
+
+
+By.textarea, 
+By.model, 
+WebElement.all, 
+WebElement.evaluate
+
+getDriver() - Gets the parent web element of this web element.
+// Using getDriver to find the parent web element to find the cat li
+var liDog = element(by.css('.dog')).getWebElement();
+var liCat = liDog.getDriver().findElement(by.css('.cat'));
+
+
+Advantage - 
+Simple syntax to write test cases
+The ability to run multiple browsers at once using Selenium Grid
+Angular-specific locators
+Support for Behavior-driven development such as Jasmine/Mocha
+No need to add sleeps/waits
+Supported integration with Jenkins/Browser Stack/Grunt etc.
+Get rid of dealing with synchronization issue in Angular JS websites
+Multiple browser support (Firefox, Chrome, Safari, Internet explorer)
+
+If we are trying to hit is a non-angular website, we set the ignoreSynchronization tag to ‘true’. if you do not make this tag true, your test will fail with error “Angular could not be found on the page
+browser.ignoreSynchronization = true; //in spec.js
+
+Annotations - beforeEach’ and ‘afterEach’
+//
+expect(element.all(by.repeater('result in memory'))
+expect().toEqual
+expect().not.toEqual
+expect().toContain();
+expect(). .isDisplayed()).toBe(true);
+
+//locators
+// Find an element with a certain ng-model.
+// Note that at the moment, this is only supported for AngularJS apps.
+by.model('name')
+
+// Find an element bound to the given variable.
+// Note that at the moment, this is only supported for AngularJS apps.
+by.binding('bindingname')
+
+$('my-css');
+// Is the same as:
+element(by.css('my-css'));
+
+Actions - The element() function returns an ElementFinder object
+ It will not contact the browser until an action method has been called
+ 
+// Click on the element.
+el.click();
+// Send keys to the element (usually an input).
+el.sendKeys('my text');
+// Clear the text in an element (usually an input).
+el.clear();
+// Get the value of an attribute, for example, get the value of an input.
+el.getAttribute('value');
+
+Since all actions are asynchronous, all action methods return a promise.
+var el = element(locator);
+el.getText().then(function(text) {
+  console.log(text);
+});
+
+
+//To deal with multiple DOM elements, use the element.all function
+// Number of elements.
+element.all(locator).count();
+
+// Get by index (starting at 0).
+element.all(locator).get(index);
+
+// First and last.
+element.all(locator).first();
+element.all(locator).last();
+
+When you call driver.findElement(locator), WebDriver immediately sends a command over to the browser asking it to locate the element.
+var myButton = ??;
+We want to re-use the variable myButton throughout your test. ElementFinders get around this by simply storing the locator information until an action is called.
+
+var myButton = element(locator);
+// No command has been sent to the browser yet.
+myButton.click();
+// Now two commands are sent to the browser - find the element, and then click it.
+ElementFinders also enable chaining to find subelements, such as element(locator1).element(locator2)
+
+When writing end-to-end tests, a common pattern is to use Page Objects. 
+Page Objects help you write cleaner tests by encapsulating information about the elements on your application page.
+A Page Object can be reused across multiple tests, and if the template of your application changes, you only need to update the Page Object.
+
+Without page object 
+describe('angularjs homepage', function() {
+  it('should greet the named user', function() {
+    browser.get('http://www.angularjs.org');
+    element(by.model('yourName')).sendKeys('Julie');
+    var greeting = element(by.binding('yourName'));
+    expect(greeting.getText()).toEqual('Hello Julie!');
+  });
+});
+
+With Page Object 
+var AngularHomepage = function() {
+  var nameInput = element(by.model('yourName'));
+  var greeting = element(by.binding('yourName'));
+
+  this.get = async function() {
+    await browser.get('http://www.angularjs.org');
+  };
+
+  this.setName = async function(name) {
+    await nameInput.sendKeys(name);
+  };
+
+  this.getGreetingText = function() {
+    return greeting.getText();
+  };
+
+  // Not async, returns the element
+  this.getGreeting = function() {
+    return greeting;
+  };
+};
+module.exports = new AngularHomepage();
+
+
+//Test file
+var angularHomepage = require('./AngularHomepage');
+describe('angularjs homepage', function() {
+  it('should greet the named user', async function() {
+    await angularHomepage.get();
+
+    await angularHomepage.setName('Julie');
+
+    expect(await angularHomepage.getGreetingText()).toEqual('Hello Julie!');
+  });
+});
+
+
+WebDriverJS maintains a queue of pending promises, called the control flow, to keep execution organized
+browser.get call is at the front of the control flow queue, 
+and the name.getText() call is at the back. 
+The value of name.getText() at point A is an unresolved promise object
+Protractor adapts Jasmine so that each spec automatically waits until the control flow is empty before exiting.
+
+Jasmine expectations are also adapted to understand promises. That's why this line works - the code actually adds an expectation task to the control flow, which will run after the other tasks:
+
+Selenium is a browser automation framework. Selenium includes the Selenium Server, the WebDriver APIs, and the WebDriver browser drivers.
+
+Protractor works in conjunction with Selenium to provide an automated test infrastructure that can simulate a user’s interaction with an Angular application running in a browser or mobile device.
+Protractor is a wrapper around WebDriverJS, the JavaScript bindings for the Selenium WebDriver API
+WebDriver commands are asynchronus. They are scheduled on a control flow and return promises
+
+
+- open a new tab on link click and code to point to a new tab
+
+browser.getAllWindowHandles().then(function(handles) {
+	browser.switchTo().window(handles[1]).then(function() {
+			//Write the code which needs to be executed in the new tab
+});
+});
+
+- Opening an entirely new browser with new session
+When you need to perform some actions on a browser and need to do further actions on a different session of the browser, we need to use the forkNewDriverInstance.
+
+describe('Code to understand assertions/annotations', function() {
+//Create a new browser instance
+var newBrowser = browser.forkNewDriverInstance();
+it('should should open multiple browsers instances', function() {
+//Opens a URL in the 1st browser instance
+browser.get('http://juliemr.github.io/protractor-demo/');
+//Opens a URL in the 2nd browser instance
+newBrowser.get('https://www.madewithangular.com/#/');
+newBrowser.driver.quit();
+});
+});
+
+- Running your test case in multiple browsers
+// conf.js
+exports.config = {
+    framework: 'jasmine',
+specs: ['SomeSpec.js'],
+multiCapabilities: [{
+ browserName: 'firefox'
+}, {
+browserName: 'chrome'
+}]
+}
+
+BrowserStack is a cross-browser testing tool which can also be used to test your applications across different browsers. It can also be integrated with Protractor by adding the browserStack credentials in your config file.
+
+Grunt is a JavaScript task runner. It provides you with the ability to perform several tasks for you. Its awesomeness is that there are more than 4000 tasks and you can create even more tasks as per your requirement.
+ 
