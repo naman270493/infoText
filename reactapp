@@ -1,0 +1,143 @@
+React 
+
+index.ejs has the entry for all the files
+server/index.js
+
+app.get("*", (req, res, next) => {
+			const activeRoute = routes.find((route) => matchPath(req.url, route)) || {}
+			const kanapromise = activeRoute.fetchKanaData  ? activeRoute.fetchKanaData(req.path) : Promise.resolve()
+			
+			kanapromise.then((data) => {
+				const configjson = returnJson('./config/ampConstant.json')
+				const context = { data }
+				
+	kanatitle = renderToString(
+				
+      <Title {...data}/>
+    )
+	
+	relSoln = renderToString(
+      <RelatedSolutions {...data } location={req.url}/>
+    )
+	
+	kanacontent = renderToString(
+      <StaticRouter location={req.url} context={context}>
+        <App />
+      </StaticRouter>
+    ) 
+	
+	var compileHTML = ejs.compile(fs.readFileSync('./views/index.ejs', 'utf8'));
+		finalHTML = compileHTML({
+			kanatitle : kanatitle,			
+			kanacontent : kanacontent,
+			relatedsolution : relSoln,
+			title : title,
+			
+		});
+	})
+	
+	app.listen(7070, () => {
+  console.log(`Server is listening on port: 7070`)
+})
+
+shared/routes.js
+
+import KanaContent from './KanaContent'
+import { fetchKanaArticleData} from './api'
+
+const routes =  [
+  {
+    path: '/esupportamp/:service/:id',
+    component: KanaContent,
+	fetchKanaData: (path = '') => fetchKanaArticleData(path.split('/').pop())	
+  }
+]
+
+export default routes
+
+
+
+shared/api.js
+
+export function fetchKanaArticleData (kanaid) {
+
+  const kanaencodedURI = encodeURI(kanahost + '/kmservices/v2/contents/'+kanaid+'?app-id=esupport')
+  
+  return isofetch(kanaencodedURI,opt(kanaencodedURI))
+    .then(result=>result.json())
+    .then(items=>({items: items.resultBody}))
+    .catch((error) => {     
+      return null
+    });
+}
+
+shared/kanaContent.js
+
+class KanaContent extends Component {
+	
+	constructor(props) {
+    super(props)
+
+    let repos
+      repos = this.props.staticContext.data
+
+    this.state = {
+      repos,
+    }
+  }
+	  render() {
+			const { repos } = this.state
+		  return (
+				<h2 className="article-heading" dangerouslySetInnerHTML={{__html:repos.items.contentTypeProperties.sectiontitle}}></h2>
+				
+				<AmpHelpers.Bind class="model.firstStepContent.expand ? 'show-more  firstStepsContent newStepContent hAuto' : 'show-more  firstStepsContent newStepContent'" >
+						{props => 
+						<div {...props} className="show-more  firstStepsContent newStepContent">
+							<div className="newStepContent" dangerouslySetInnerHTML={{__html:absoluteUrls(repos.items.contentTypeProperties.firststepscontent)}}></div>
+						</div>
+						}
+					</AmpHelpers.Bind>
+					);
+					}
+
+				
+context in react
+Context provides a way to pass data through the component tree without having to pass props down manually at every level.
+Context is designed to share data that can be considered “global” for a tree of React components, such as the current authenticated user, theme, or preferred language. 
+
+Container component
+A container does data fetching and then renders its corresponding sub-component.
+Like a controller in angular
+
+Why container? 
+We can use a class component is responsible for both fetching data and presenting it. There’s nothing “wrong” with this but you miss out on a few benefits of React.
+but we cannot reuse it , 
+by container component 
+We’ve separated our data-fetching and rendering concerns.
+We’ve made our CommentList component reusable.
+
+Proptypes- 
+To run typechecking on the props for a component, you can assign the special propTypes property
+
+import PropTypes from 'prop-types';
+
+class Greeting extends React.Component {
+  render() {
+    return (
+      <h1>Hello, {this.props.name}</h1>
+    );
+  }
+}
+
+Greeting.propTypes = {
+  name: PropTypes.string
+};
+
+PropTypes exports a range of validators that can be used to make sure the data you receive is valid. In this example, we’re using PropTypes.string. When an invalid value is provided for a prop, a warning will be shown in the JavaScript console.
+
+view component
+Presentational Component Patterns can best be described as patterns that are primarily concerned with how things look. The primary function of a presentational component is to display data. 
+Most times they contain no more than a render method.
+Presentational components do not know how to load or alter the data that they render.
+Presentational components rarely have any internally changeable state properties.
+					
