@@ -1,3 +1,58 @@
+The typeof operator returns a string indicating the type of the unevaluated operand.
+
+var x;
+undefined
+
+typeof x=="undefined"
+true
+typeof x==="undefined"
+true
+typeof x=="undefined"
+true
+typeof (typeof 1) === 'string';
+true
+typeof /regex/ === 'object'
+true
+typeof null === 'object';
+true
+
+can angular app satrt without ng-app
+Yes, it can 
+By automatic bootstrap it can
+angular.element(document).ready(function() {
+	angular.bootstrap(document, ['myApp']);
+});
+
+scope: false  Directive uses its parent scope
+scope:true Directive gets a new scope
+
+restrict: EA - this occurs in directive then we can use elemnet as both 
+like in case restrict: 'E' then if we declare directive as attribute then angular with throw an error
+by EA we can use it like elemnet and attribute both (by default EA)
+
+
+
+Compile function
+
+Each directive's compile function is only called once, when Angular bootstraps.
+
+Primarily, this is done for optimisation purposes; consider the following markup:
+
+<tr ng-repeat="raw in raws">
+    <my-raw></my-raw>
+</tr>
+The <my-raw> directive will render a particular set of DOM markup. So we can either:
+
+Allow ng-repeat to duplicate the source template (<my-raw>), and then modify the markup of each instance template (outside the compile function).
+Modify the source template to involve the desired markup (in the compile function), and then allow ng-repeat to duplicate it.
+If there are 1000 items in the raws collection, the latter option may be faster than the former one.
+
+Closure means that an inner function always has access to the vars and parameters of its outer function, even after the outer function has returned. Therefore, you can call the inner function later in your program.
+A closure is a function that has access to the parent scope, even after the scope has closed.
+The closure has three scope chains: it has access to its own scope (variables defined between its curly brackets), it has access to the outer function’s variables, and it has access to the global variables.
+Closures store references to the outer function’s variables; they do not store the actual value. ?Because closures have access to the updated values of the outer function’s variables, they can also lead to bugs when the outer function’s variable changes with a for loop.
+For this we use IIFE.
+
 let x= "hi";
 let y ="ih";
 
