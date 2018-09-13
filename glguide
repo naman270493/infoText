@@ -1,0 +1,180 @@
+undefined x 1 in JavaScript
+
+var trees = ["redwood","bay","cedar","oak","maple"];
+delete trees[3];
+["redwood", "bay", "cedar", undefined × 1, "maple"]
+
+var arr= [10,12,15,21];
+for(i=0;i<arr.length;i++){ 
+
+setTimeout(function(){ console.log(i+"element"+arr[i]); }, 3000)
+}
+
+//output
+4elementundefined
+4elementundefined
+4elementundefined
+4elementundefined
+
+ factory service provider are all same - service returns factory which returns injector
+ 
+  function factory(name, factoryFn) { return provider(name, { $get: factoryFn }); }
+
+  function service(name, constructor) {
+    return factory(name, ['$injector', function($injector) {
+      return $injector.instantiate(constructor);
+    }]);
+  }
+  
+- we have this supportDirective.js where we have placed all directive definition
+we have this authSupportDirective.js for auth experience directives
+
+attEcarePrintTitleMobile , attEcarePrintTitleDesktop, 
+
+Directive Definition Object
+Object returned by directive declaration that provides instructions to the compiler.
+
+//Routes
+
+supportApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', function($stateProvider, $urlRouterProvider, $locationProvider) {
+
+$urlRouterProvider.otherwise('/'); 
+	$stateProvider
+	.state('default', {
+        url: '/',
+        views: {
+	        'body': {
+	        	templateUrl: function ($stateParams) {
+	   				return (isMobile)? '':'/esupport/index.jsp';
+	            }
+				    }
+  	        }
+	    }
+    })
+	.state('home', {
+        url: '/:serviceID',
+        resolve: { getProfileData: ['supportService', '$window', '$stateParams', '$articleValue', '$articleConstant', 'supportUtilService',
+                function(supportService, $window, $stateParams, $articleValue, $articleConstant, supportUtilService) {
+                    return supportService.getAccountData().then(function(response) {
+                        if (!angular.isDefined(response.data.accountDetails)) {
+                            $window.location.href = '/esupport/index.jsp';
+                        } else {
+                            return response;
+                        }
+                    });
+                }
+            ]
+			}
+			,
+        views: {
+			'profile':{
+				
+				templateUrl: function () {
+					return (isMobile)? 'common/auth/views/m/accountLanding.html':'common/auth/views/desktop/accountLanding.html';
+				},		
+				controller : 'profileController as profCtrl',				
+			},
+			'authenticatedBody': {
+				templateUrl: function () {
+				return (isMobile)? 'common/auth/views/m/mainBodyAuth.html':'common/auth/views/desktop/mainBodyAuth.html';
+			},		
+			controller : 'mainLandingController',	           
+			},
+	        'body': {
+	        	templateUrl: function ($stateParams) {
+					return (isMobile)? 'main/m/views/mainBody.html':'main/desktop/views/mainBody.html';
+	            },
+	            controller: 'mainLandingController',	            
+	        }
+	    }
+    }).state('category-section', {
+        url: '/:serviceID/:topicCD',
+        views: {
+	        'body': {
+	        	templateUrl: function ($stateParams) {
+    				return (isMobile)? 'main/m/views/mainBody.html':'main/desktop/views/mainBody.html';
+	            },
+	            controller: 'mainLandingController',
+	            resolve: {
+	            	
+					getKMStopicData: ['supportService', '$stateParams', function(supportService, $stateParams) {
+						var serviceCode = supportService.getServiceSystemName($stateParams.serviceID);
+	            		return supportService.retrieveSubtopicsTopic(serviceCode, $stateParams.topicCD.split(/[- ]+/).pop());
+	                }],
+	                getTopicSearch: ['supportService', '$stateParams','getKMStopicData', function(supportService, $stateParams,getKMStopicData) {
+	                	var serviceCode = supportService.getServiceSystemName($stateParams.serviceID);
+	                	 return supportService.retrieveTopicInfoList(serviceCode,$stateParams.topicCD.split(/[- ]+/).pop());
+					}],
+					getTopicInfo:['supportService', '$stateParams','getTopicSearch', function(supportService, $stateParams,getTopicSearch) {
+						return supportService.getTopicInfoDetails(supportService.getTopicPublishID(getTopicSearch.data.resultBody.searchResults, $stateParams.topicCD.split(/[- ]+/).pop()));
+					}],
+	                getKMSServiceData: ['supportService', '$stateParams', function(supportService, $stateParams) {
+	                	var serviceCode = supportService.getServiceSystemName($stateParams.serviceID);
+	            		return supportService.retrieveSubtopicsTopic(serviceCode);
+	                }]	                
+	            }
+	        }
+	    }
+    })
+}]);
+}
+
+How can we pass data in sibling controller
+Holding the shared data in a factory or service
+Holding the shared data in the root scope
+Using events to notify other controller about changes to the data
+
+You can also use $controller and inject it in controller where we want to use it
+
+//common controller
+angular.module('app',[]).controller('CommonCtrl', ['$scope', function($scope){
+      var self = this;
+      $scope.stuff1 = function(){
+
+      }
+
+      self.doCommonStuff = function(){
+               // common stuff here
+               $scope.stuff1();
+      };
+      return self;
+}]);
+
+
+//Test controller
+angular.module('app',[]).controller('TestCtrl1', ['$scope','$controller', function($scope, $controller){
+        var commonCtrl = $controller('CommonCtrl',{$scope: $scope}); // passing current scope to commmon controller
+        commonCtrl.doCommonStuff();
+}]);
+
+
+Internally service calls factory that internally calls provider(angular.min.js) - diferences
+DDO
+interceptor
+$timestamp
+broadcast, on, emit - sibling controller m $controller krke data daalte hai
+ES6 observables
+regenerator function
+ui.bootstrap in angular
+object.setProperties krke 
+how can u optimize ur application - make small small modules and add 
+angular.run
+mixins
+directives u made in ur application
+
+design pattern price.pdf
+
+react new component liefecycle used in 
+new function in latest
+redux questions
+third party integration llike bluebird
+use standard document for study
+
+data structures - sorting 
+flickering effect - ng-cloak
+   apply digest cycle
+
+in angular 1.6, if we have a list of object to be loaded half of them are loaded and at that instant the list to be loaded changes
+then wat will happen
+it will load the next list which has been left
+ANd will agin rleoad the complete list
