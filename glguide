@@ -178,3 +178,72 @@ in angular 1.6, if we have a list of object to be loaded half of them are loaded
 then wat will happen
 it will load the next list which has been left
 ANd will agin rleoad the complete list
+
+
+Interceptors
+
+For purposes of global error handling, authentication, or any kind of synchronous or asynchronous pre-processing of request or postprocessing of responses, it is desirable to be able to intercept requests before they are handed to the server and responses before they are handed over to the application code that initiated these requests.
+
+The interceptors are service factories that are registered with the $httpProvider by adding them to the $httpProvider.interceptors array.  The factory is called and injected with dependencies (if specified) and returns the interceptor.
+
+Two kinds of interceptor
+request: interceptors get called with a http config object.  The function is free to modify the config object or create a new one. The function needs to return the config object directly, or a promise containing the config or a new config objec
+requestError: interceptor gets called when a previous interceptor threw an error or resolved with a rejection.
+response: interceptors get called with http response object. The function is free to modify the response object or create a new one. The function needs to return the response object directly, or as a promise containing the response or a new response object.
+responseError: interceptor gets called when a previous interceptor threw an error or resolved with a rejection.
+
+// register the interceptor as a service
+$provide.factory('myHttpInterceptor', function($q, dependency1, dependency2) {
+  return {
+    // optional method
+    'request': function(config) {
+      // do something on success
+      return config;
+    },
+
+    // optional method
+   'requestError': function(rejection) {
+      // do something on error
+      if (canRecover(rejection)) {
+        return responseOrNewPromise
+      }
+      return $q.reject(rejection);
+    },
+
+
+
+    // optional method
+    'response': function(response) {
+      // do something on success
+      return response;
+    },
+
+    // optional method
+   'responseError': function(rejection) {
+      // do something on error
+      if (canRecover(rejection)) {
+        return responseOrNewPromise
+      }
+      return $q.reject(rejection);
+    }
+  };
+});
+
+$httpProvider.interceptors.push('myHttpInterceptor');
+
+
+// alternatively, register the interceptor via an anonymous factory
+$httpProvider.interceptors.push(function($q, dependency1, dependency2) {
+  return {
+   'request': function(config) {
+       // same as above
+    },
+
+    'response': function(response) {
+       // same as above
+    }
+  };
+});
+
+
+
