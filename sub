@@ -1,0 +1,5151 @@
+1
+00:00:00,030 --> 00:00:08,189
+hey guys and girls today we're gonna
+look at lifecycle hooks and react just
+
+2
+00:00:08,189 --> 00:00:14,370
+like in life you're born and you know
+you'll learn some skills you you get a
+job you get married you retire and then
+
+3
+00:00:16,980 --> 00:00:23,550
+you die components go through also a
+life cycle they are born and there they
+
+4
+00:00:23,550 --> 00:00:32,340
+they die also and in between they go to
+certain things and if you want to do
+
+5
+00:00:32,340 --> 00:00:36,630
+specific things like for example if you
+want to make an AJAX call when example
+
+6
+00:00:36,630 --> 00:00:41,309
+you do make it in the life of a
+component if you want to change the
+state when do you do it so this hooks
+
+7
+00:00:43,290 --> 00:00:50,190
+are nothing but methods where you can
+you can do appropriate thing things and
+
+8
+00:00:50,190 --> 00:00:55,559
+so we're gonna look at what can you do
+with each hooks and when they are called
+
+9
+00:00:55,559 --> 00:01:01,079
+and why they are called so we can
+control things very smoothly and it
+
+10
+00:01:01,079 --> 00:01:06,090
+they're they're very important to learn
+if you want to react because you can't
+
+11
+00:01:06,090 --> 00:01:12,180
+just call things anywhere you need to
+make sure that you do it in the right
+
+12
+00:01:12,180 --> 00:01:18,869
+hook by the way this is a part of a much
+larger series on react and if you're not
+
+13
+00:01:18,869 --> 00:01:23,210
+following it I'll provide a link to the
+playlist so you can check it out and
+
+14
+00:01:23,210 --> 00:01:37,869
+welcome to Texas tutorials
+[Music]
+
+15
+00:01:40,700 --> 00:01:46,710
+all right so to begin with I have
+created a project using create react app
+I'm inside the APS and here all I have a
+
+16
+00:01:50,130 --> 00:01:53,880
+simple render function it app is my main
+component so what we're gonna do we're
+
+17
+00:01:53,880 --> 00:01:57,750
+gonna write our lifecycle hooks here
+when you create a component the first
+
+18
+00:01:57,750 --> 00:02:03,180
+thing that runs is actually constructor
+so let's write a constructor here and
+
+19
+00:02:03,180 --> 00:02:07,310
+when you write a constructor you have to
+have super I'm just gonna say
+
+20
+00:02:07,310 --> 00:02:12,450
+console.log it's gonna print down the
+constructor so we can look at exactly
+
+21
+00:02:12,450 --> 00:02:18,209
+when it's running in the lifecycle of a
+component there are three things the
+
+22
+00:02:18,209 --> 00:02:23,459
+first thing is initial renner so when
+you create a component component we'll
+
+23
+00:02:23,459 --> 00:02:28,980
+go through the first time it renders the
+second thing is if you change something
+
+24
+00:02:28,980 --> 00:02:35,700
+like a state or prop or something the
+component will re-render itself based on
+
+25
+00:02:35,700 --> 00:02:40,590
+that the change that you have made so
+that is a second kind of a list of
+
+26
+00:02:40,590 --> 00:02:45,000
+lifecycle hooks that we're gonna look in
+it and the third thing is when you
+
+27
+00:02:45,000 --> 00:02:50,489
+destroy the component what would happen
+so here we're gonna look at the initial
+
+28
+00:02:50,489 --> 00:02:57,090
+render and the constructor only runs one
+time it only runs when it initially
+
+29
+00:02:57,090 --> 00:03:02,700
+renders this is actually a good place to
+set the initial State and so I can
+simply say this dot state equal to John
+
+30
+00:03:07,650 --> 00:03:15,299
+however you can also write this outside
+the constructor state equal to and name
+
+31
+00:03:15,299 --> 00:03:21,690
+and I can call it Peter here so we would
+know which one really runs first inside
+
+32
+00:03:21,690 --> 00:03:29,610
+here if I just simply do this this dot
+state dot name that the one that runs
+
+33
+00:03:29,610 --> 00:03:38,180
+the second would override so John gets
+render that means that this runs first
+
+34
+00:03:38,180 --> 00:03:45,870
+and then this runs we're gonna just
+remove this usually I I try to put the
+
+35
+00:03:45,870 --> 00:03:50,340
+state here not inside the cancer
+but it is your personal choice what
+
+36
+00:03:50,340 --> 00:03:53,849
+we're gonna keep the state inside a
+constructor for now after the
+
+37
+00:03:53,849 --> 00:04:01,310
+constructor there is another method that
+runs which call component will mount
+
+38
+00:04:01,310 --> 00:04:06,840
+remember the component hasn't mounted
+yet if I just simply console.log inside
+
+39
+00:04:06,840 --> 00:04:13,019
+and I would say component will mount and
+we can look at it in which the
+
+40
+00:04:13,019 --> 00:04:17,970
+constructor run first and then component
+will mount run second alright so what
+
+41
+00:04:17,970 --> 00:04:24,449
+can you do in component bill mount you
+have already drawn the constructor but
+
+42
+00:04:24,449 --> 00:04:29,310
+the render hasn't happened yet you have
+the state and initial state and initial
+
+43
+00:04:29,310 --> 00:04:36,120
+prompt you can actually change the state
+so you can do set state in computer will
+
+44
+00:04:36,120 --> 00:04:41,639
+mount why would you do that why would
+you set state even after setting up the
+
+45
+00:04:41,639 --> 00:04:47,940
+initial State in the constructor well
+some time based on the props you want to
+
+46
+00:04:47,940 --> 00:04:52,590
+change the state and this would be in an
+ideal place to do it because the
+
+47
+00:04:52,590 --> 00:04:57,479
+component hasn't made render so if I
+change the state right now the component
+
+48
+00:04:57,479 --> 00:05:01,500
+is not gonna read render itself because
+it hasn't render because you go into the
+
+49
+00:05:01,500 --> 00:05:08,550
+first initial state also component will
+mount only runs once and that is doing
+
+50
+00:05:08,550 --> 00:05:13,590
+the initial render so what else can you
+do it so if you want to do something
+with the global events like a window or
+
+51
+00:05:17,010 --> 00:05:24,000
+document you can set it here if you want
+to so let's do that window dot let's say
+
+52
+00:05:24,000 --> 00:05:31,229
+inner width I'd say if it's less than
+500 then I want to set this into a state
+
+53
+00:05:31,229 --> 00:05:42,030
+so I can say dot set state enervate
+equal to window dot in a quick print
+
+54
+00:05:42,030 --> 00:05:51,779
+that value here so I can say this dot
+State DOT inner width so we can look at
+
+55
+00:05:51,779 --> 00:05:58,710
+it I'm just gonna pipe it here in
+between so this should be so now if I
+
+56
+00:05:58,710 --> 00:06:04,619
+look at it well nothing prints here that
+is because my window is still greater
+
+57
+00:06:04,619 --> 00:06:14,879
+than 500 pixel so to to see it if I just
+squeeze my window and then I have to re
+
+58
+00:06:14,879 --> 00:06:22,139
+load it because it only happens during
+the initial state so now I can see that
+
+59
+00:06:22,139 --> 00:06:29,819
+inner width is 428 I can set state a
+component will mount hook another
+
+60
+00:06:29,819 --> 00:06:36,210
+important thing to notice is this is the
+only hook that executes on server
+rendering and we are not gonna cover it
+
+61
+00:06:38,459 --> 00:06:45,539
+over here but just to let you know the
+next hook would run is render so which
+
+62
+00:06:45,539 --> 00:06:52,529
+we already have every component should
+have a render method so let just here if
+
+63
+00:06:52,529 --> 00:06:59,610
+I'm going to console.log vendor here and
+if I save it in the console I can see
+
+64
+00:06:59,610 --> 00:07:04,319
+constructor then component will mount
+and then render method happens now when
+
+65
+00:07:04,319 --> 00:07:10,740
+render happens it's basically rendering
+the component so basically it takes the
+
+66
+00:07:10,740 --> 00:07:15,899
+state and the props and renders our
+component so what should not be done in
+
+67
+00:07:15,899 --> 00:07:21,659
+render I would suggest not to call the
+sent state in render but let's say if
+
+68
+00:07:21,659 --> 00:07:26,939
+you could do it then as soon as you do
+that you would get another render right
+
+69
+00:07:26,939 --> 00:07:34,519
+because render is a is a method that
+calls called every time you change the
+
+70
+00:07:34,519 --> 00:07:40,050
+state or prop don't set the state in
+render and also another important thing
+
+71
+00:07:40,050 --> 00:07:45,749
+to notice is let's say your component
+have a child component and it can have
+
+72
+00:07:45,749 --> 00:07:51,199
+its own children and you know a tree of
+components right so when you do a render
+
+73
+00:07:51,199 --> 00:07:57,990
+it would go through the cycle of
+building each sub component and each sub
+
+74
+00:07:57,990 --> 00:08:03,010
+component each child component basically
+would go to constructor component will
+
+75
+00:08:03,010 --> 00:08:09,460
+mount render and from top to bottom all
+the way before your your parent
+
+76
+00:08:09,460 --> 00:08:16,300
+component finishes rendering so that
+brings to our next hook call component
+
+77
+00:08:16,300 --> 00:08:22,180
+did mount which means before render it
+was component will mount and after
+
+78
+00:08:22,180 --> 00:08:27,610
+render its component dip mount which
+means it has already rendered component
+
+79
+00:08:27,610 --> 00:08:36,729
+did mount and I can simply console.log
+it here alright and let's look at it so
+
+80
+00:08:36,729 --> 00:08:42,220
+as we can see constructor component will
+mount render and component in mount now
+
+81
+00:08:42,220 --> 00:08:46,750
+important thing to notice is since this
+component doesn't have any children if
+
+82
+00:08:46,750 --> 00:08:52,270
+he add a children then we would we
+should be able to see how the children
+
+83
+00:08:52,270 --> 00:08:57,070
+gets render so let's do that so what I'm
+gonna do is I'm going to create another
+
+84
+00:08:57,070 --> 00:09:04,270
+component a new file I'm just gonna say
+child died GS copy everything that I've
+done here we're gonna call it child and
+
+85
+00:09:08,100 --> 00:09:14,860
+constructor we're now gonna state here
+we're just gonna say child constructor
+
+86
+00:09:14,860 --> 00:09:21,900
+and we're not gonna do this here we're
+just gonna say child component val mount
+
+87
+00:09:21,900 --> 00:09:28,660
+child component bit mount child render
+we are not going to do anything else
+
+88
+00:09:28,660 --> 00:09:34,960
+here and then in the end we can export
+the child now in the app dodgiest we
+
+89
+00:09:34,960 --> 00:09:47,230
+need to import the child import child
+from child and in here I can have child
+
+90
+00:09:47,230 --> 00:10:00,220
+and I can also pass some prop called
+name equal to this dot state dot name
+
+91
+00:10:00,220 --> 00:10:11,740
+inside the child we can say name this
+props dot mean okay so now let's see
+
+92
+00:10:11,740 --> 00:10:14,380
+what it renders alright so now you can
+see
+
+93
+00:10:14,380 --> 00:10:20,440
+that it's rendering the child and if you
+look at the chronology now so first the
+
+94
+00:10:20,440 --> 00:10:25,810
+app components constructor runs then app
+components constructor component will
+mount runs and then render and then it
+
+95
+00:10:28,780 --> 00:10:35,800
+doesn't run the component did mount but
+instead it would run child's constructor
+
+96
+00:10:35,800 --> 00:10:42,550
+a chance comparable now Charles render
+and then child's component in mount and
+
+97
+00:10:42,550 --> 00:10:48,610
+then the app component a mount so that
+the component did mount actually if you
+
+98
+00:10:48,610 --> 00:10:55,060
+have a hierarchy of component the the
+last one would run first and then it
+would go up the chain and the app
+
+99
+00:10:57,880 --> 00:11:05,610
+component component big mount run in the
+end because when you render a component
+
+100
+00:11:05,610 --> 00:11:11,350
+you need to render everything else
+before you can say I finished rendering
+
+101
+00:11:11,350 --> 00:11:18,790
+right basically I am completely mounted
+so did a component in mount also is only
+runs once and only runs during the
+
+102
+00:11:23,140 --> 00:11:30,370
+initial initial cycle so what can you do
+in component did mount you can make
+
+103
+00:11:30,370 --> 00:11:36,550
+actually if you want to make an AJAX
+call you can make an AJAX call here this
+
+104
+00:11:36,550 --> 00:11:41,500
+is the right place to do this is also a
+good place to set up any subscriptions
+
+105
+00:11:41,500 --> 00:11:46,210
+if you want to but make sure that you
+unsubscribe when there is a method
+
+106
+00:11:46,210 --> 00:11:52,240
+called a component did unmount when the
+component dies so make sure that you
+
+107
+00:11:52,240 --> 00:11:58,930
+clean it up you could actually call set
+state in component dead mount but when
+you do that it would basically read
+
+108
+00:12:01,870 --> 00:12:06,360
+render the component okay so these are
+the the methods
+
+109
+00:12:06,360 --> 00:12:12,100
+hooks for the initial rendering now
+let's look at what happens if you change
+
+110
+00:12:12,100 --> 00:12:18,460
+the state when the component re-renders
+what are the ways to read under
+
+111
+00:12:18,460 --> 00:12:23,800
+component when you change the state it
+should read under when you change a prop
+it should read under or you can
+
+112
+00:12:25,620 --> 00:12:30,310
+specifically call
+all force update method basically saying
+I don't really care just read under and
+
+113
+00:12:33,389 --> 00:12:40,300
+the situation it would be tender so
+let's try to rerender so basically we
+
+114
+00:12:40,300 --> 00:12:46,509
+can start with the chained state so in
+the app what I can do is I can have a
+
+115
+00:12:46,509 --> 00:12:53,290
+button and I can say change and inside
+the button I can have on click event and
+
+116
+00:12:53,290 --> 00:13:02,290
+when this runs I can simply don change
+state event which we haven't written so
+
+117
+00:13:02,290 --> 00:13:11,290
+I'm just gonna write here change state
+and all it's gonna do here is this that
+
+118
+00:13:11,290 --> 00:13:17,889
+set state and just gonna change the name
+to let's say Jill okay yeah I have to
+
+119
+00:13:17,889 --> 00:13:27,370
+say mind this and now if I click on it
+when I change the state it only runs
+
+120
+00:13:27,370 --> 00:13:32,529
+render so we don't have we haven't put
+the any other hooks right now when it
+
+121
+00:13:32,529 --> 00:13:39,610
+rear Enders the only hooks running is a
+render and then child render so let's
+
+122
+00:13:39,610 --> 00:13:45,519
+look at the hooks when you read render
+your component so the first hook is
+
+123
+00:13:45,519 --> 00:13:55,480
+called component will receive props lets
+console.log it to see when does this
+
+124
+00:13:55,480 --> 00:14:00,309
+happen and i can do the same in the
+child here i'm just gonna say child
+
+125
+00:14:00,309 --> 00:14:07,540
+component will receive prop so here the
+child will receive pop runs but the main
+
+126
+00:14:07,540 --> 00:14:13,089
+components amount doesn't run i'm
+assuming that is because I don't have
+
+127
+00:14:13,089 --> 00:14:19,959
+any props in the the main components so
+what can we do here in the component
+will receive props we will have a
+
+128
+00:14:21,819 --> 00:14:26,949
+glimpse of upcoming state and the prop
+right because either you're changing a
+
+129
+00:14:26,949 --> 00:14:32,259
+state or a changing prop you could set
+state here if you want to but let's say
+
+130
+00:14:32,259 --> 00:14:37,990
+if your change is triggered because of
+another sad state it should be ignored
+
+131
+00:14:37,990 --> 00:14:42,430
+because it doesn't make sense and
+philately don't try to change any props
+in this matter so that's the main
+
+132
+00:14:44,770 --> 00:14:50,650
+important thing to notice all right so
+the next hook is should component update
+
+133
+00:14:50,650 --> 00:14:56,920
+it sounds more like a question let's say
+if you want to make a decision that you
+
+134
+00:14:56,920 --> 00:15:02,020
+want to rear ender it or not you can
+make that decision here based on
+
+135
+00:15:02,020 --> 00:15:08,200
+whatever logic that you want to make a
+decision on and so this method actually
+
+136
+00:15:08,200 --> 00:15:14,500
+has you have to return something you if
+you return true which means it will go
+
+137
+00:15:14,500 --> 00:15:19,270
+through the rendering if you return
+false then the rear end ring would stop
+
+138
+00:15:19,270 --> 00:15:23,860
+here should not further and you would
+also have argument here it would have
+
+139
+00:15:23,860 --> 00:15:33,460
+your next Pro and next stake here so you
+can use those to make your decision I
+
+140
+00:15:33,460 --> 00:15:37,839
+should console.log here
+and I should have the same matter in
+
+141
+00:15:37,839 --> 00:15:42,089
+child I should say child here because
+it's a child
+
+142
+00:15:42,089 --> 00:15:48,550
+all right so five on this component
+update and child now let's say if I
+do false for child so instead of true if
+
+143
+00:15:53,290 --> 00:16:00,670
+I say false then let's see what happens
+so after the initial state if I click on
+
+144
+00:16:00,670 --> 00:16:07,660
+here it basically stops the event read
+rendering of it so that's why you would
+
+145
+00:16:07,660 --> 00:16:13,330
+see in the outer the name is Jim but
+inside I can still I have still the old
+
+146
+00:16:13,330 --> 00:16:17,830
+name which is John because I stopped the
+read rendering of the child component I
+
+147
+00:16:17,830 --> 00:16:26,800
+say true then I would say both Jim so
+initially it's John here and here and if
+I change the state now I see Jill in
+
+148
+00:16:29,920 --> 00:16:33,400
+both places also another important thing
+you notice is that let's say if you
+
+149
+00:16:33,400 --> 00:16:38,260
+changing a state or prop this method
+should run and you can make a decision
+
+150
+00:16:38,260 --> 00:16:46,390
+if you want to continue the update or
+not but if it's if it's happening
+
+151
+00:16:46,390 --> 00:16:52,330
+because of the force update method which
+means you're really forcing it to update
+
+152
+00:16:52,330 --> 00:16:55,750
+then the
+method would not even run because if
+
+153
+00:16:55,750 --> 00:16:59,079
+you're forcing it there is no need to
+make a decision right because you
+
+154
+00:16:59,079 --> 00:17:03,310
+already made it to see you divorce
+update it so alright so the next method
+
+155
+00:17:03,310 --> 00:17:13,299
+is I know there are lots of methods call
+components will update alright so and I
+
+156
+00:17:13,299 --> 00:17:20,140
+can also alright so after the initial
+run if I change the state then after
+
+157
+00:17:20,140 --> 00:17:23,860
+should component update component will
+update one it's the same thing for the
+child component will update and what's
+
+158
+00:17:27,179 --> 00:17:32,919
+significance of this method component
+will update this is similar to component
+
+159
+00:17:32,919 --> 00:17:37,720
+will mount when you do an initial render
+basically if you want to set some
+
+160
+00:17:37,720 --> 00:17:43,059
+variables based on the state and props
+you can do it because you have state and
+
+161
+00:17:43,059 --> 00:17:49,720
+prop available what you should not do is
+run the set state here because if you do
+
+162
+00:17:49,720 --> 00:17:56,980
+that then there will be another
+component will update and it will take
+
+163
+00:17:56,980 --> 00:18:04,419
+you in an infinite loop so don't do sets
+stay here so after the initial state
+
+164
+00:18:04,419 --> 00:18:08,830
+when I change the state as you can see
+it component will update and then it
+renders here also component will update
+
+165
+00:18:11,169 --> 00:18:17,850
+and it renders so render happens after
+that right after that you will have
+component did update so let's do that
+
+166
+00:18:22,660 --> 00:18:30,270
+one so instead of will I have component
+did update and component data update has
+
+167
+00:18:30,270 --> 00:18:36,940
+previous props a previous state
+available so what is the significance of
+
+168
+00:18:36,940 --> 00:18:41,340
+this method component data update so
+let's say if you want to setup some
+third-party UI elements you can you can
+
+169
+00:18:45,850 --> 00:18:50,470
+do do that here okay so now we have
+looked at the initial render and the
+
+170
+00:18:50,470 --> 00:18:56,080
+rerender cycle now let's look at the it
+unmounted so when a component dies
+
+171
+00:18:56,080 --> 00:19:05,610
+there's one method that runs its call
+component will unmount component will
+
+172
+00:19:05,610 --> 00:19:09,009
+unmask
+so I can just console.log it here and
+
+173
+00:19:09,009 --> 00:19:14,829
+the same thing I can do for a child for
+so what do you do when you unmount it if
+
+174
+00:19:14,829 --> 00:19:21,539
+you if you have done something when you
+have mounted you can undo that when you
+
+175
+00:19:21,539 --> 00:19:26,379
+unmount it so you can do a lot of
+cleaning up now there is no component
+
+176
+00:19:26,379 --> 00:19:31,659
+did unmount because once it unmounted
+you don't have any because it's gone
+
+177
+00:19:31,659 --> 00:19:36,129
+that the component is consoling there is
+no method call didn't man so this is
+only method now how do you really test
+
+178
+00:19:39,009 --> 00:19:44,109
+the unmount what I'm gonna do is
+something strange I can have a button
+
+179
+00:19:44,109 --> 00:19:57,519
+here and on click equal to it would
+basically unmount unmount child so it's
+
+180
+00:19:57,519 --> 00:20:08,319
+gonna say and mount child so how should
+we unknown this child so here I can
+
+181
+00:20:08,319 --> 00:20:14,019
+write this method on mum child so just
+for sake of this example what I can do
+
+182
+00:20:14,019 --> 00:20:20,259
+is when I click on it it should render
+completely just an empty div for this
+
+183
+00:20:20,259 --> 00:20:26,469
+component so there won't be any child
+left so what I can say and this can be
+
+184
+00:20:26,469 --> 00:20:36,569
+done by setting some States so let's say
+if I set a state name let's say equal to
+
+185
+00:20:36,569 --> 00:20:43,869
+Robert so when I when I set state to
+Robert I should check here if it's
+
+186
+00:20:43,869 --> 00:20:50,709
+Robert then instead of rendering the
+child and I managed to just render empty
+
+187
+00:20:50,709 --> 00:21:02,699
+there so here I can say if this dot
+state dot name that's equal to Robert
+
+188
+00:21:02,699 --> 00:21:10,739
+then return an empty div alright else it
+should return whatever it's returning
+
+189
+00:21:10,739 --> 00:21:17,739
+okay and so when I do that it should
+unmount it so let's look at it so this
+
+190
+00:21:17,739 --> 00:21:24,580
+initial amount I close it
+now if I click on the unmount mmm the
+
+191
+00:21:24,580 --> 00:21:32,820
+component is gone the child component
+and as you can see here the child child
+
+192
+00:21:32,820 --> 00:21:40,210
+uncompleted will unmount method runs so
+this is how you unmount all right so I
+
+193
+00:21:40,210 --> 00:21:45,159
+hope you learned something from this
+tutorial and if you did um you can help
+
+194
+00:21:45,159 --> 00:21:52,120
+me by liking the video providing a nice
+comment and/or you can support the
+channel on patreon I'll provide a link
+
+195
+00:21:54,159 --> 00:21:59,860
+here or you can translate this video for
+me I'll provide a link in the
+description and thank you
+
+1
+00:00:00,030 --> 00:00:05,520
+hey guys so today we're gonna talk about
+higher-order components in react in
+JavaScript we have higher-order
+
+2
+00:00:07,350 --> 00:00:12,389
+functions which are nothing but a
+function that you pass to another
+
+3
+00:00:12,389 --> 00:00:17,130
+function as an argument
+so higher-order components are very
+
+4
+00:00:17,130 --> 00:00:20,970
+similar so what you can do you can
+abstract out the common functionality is
+
+5
+00:00:20,970 --> 00:00:26,160
+along some of the components and you can
+build a function and then you can pass
+
+6
+00:00:26,160 --> 00:00:31,050
+your component basically wrap the
+component with this function the special
+
+7
+00:00:31,050 --> 00:00:38,850
+function and do something in it inside
+and then you can return a component and
+
+8
+00:00:38,850 --> 00:00:42,600
+that's what you call higher-order
+component and the important thing to
+
+9
+00:00:42,600 --> 00:00:48,600
+notice as inside this function you don't
+really change any functionality of a
+
+10
+00:00:48,600 --> 00:00:56,190
+component you rather do kind of minor
+things like for example you can inject
+
+11
+00:00:56,190 --> 00:01:03,769
+new prompts or translate one prop to
+another you can build custom errors or
+
+12
+00:01:03,769 --> 00:01:09,330
+you can set defaults things like that so
+what we're gonna do we're gonna take a
+
+13
+00:01:09,330 --> 00:01:14,070
+very simple example so you can learn
+higher-order components and welcome to
+
+14
+00:01:14,070 --> 00:01:22,500
+tech see tutorials all right so to start
+with I have created this project using
+
+15
+00:01:22,500 --> 00:01:28,380
+create react app so this is what we're
+not working so our objective is let's
+
+16
+00:01:28,380 --> 00:01:34,409
+create a custom component and which is
+simply a button and inside a button we
+
+17
+00:01:34,409 --> 00:01:41,460
+can have a default style which will be
+inside provided inside the button and
+then we can have a prop called disabled
+
+18
+00:01:45,509 --> 00:01:52,110
+so when we pass the prop disabled it
+should pick a different style from
+
+19
+00:01:52,110 --> 00:01:56,490
+inside so we have we will have some
+logic inside the component or where it
+
+20
+00:01:56,490 --> 00:02:01,020
+would pick a different style when we
+provide a prompt and first we're gonna
+
+21
+00:02:01,020 --> 00:02:06,180
+do it using you know it just the logic
+inside the component and then we're
+
+22
+00:02:06,180 --> 00:02:13,560
+going to extract that logic out to a
+higher-order component to see how it
+
+23
+00:02:13,560 --> 00:02:16,790
+really works
+right so let's build our first component
+
+24
+00:02:16,790 --> 00:02:25,150
+so inside the source folder I am going
+to create a folder called components and
+
+25
+00:02:25,150 --> 00:02:36,409
+inside this I would have let's say
+button one Dargis okay now this button
+
+26
+00:02:36,409 --> 00:02:43,629
+it's gonna be a functional component so
+all I have to do is Const button one
+
+27
+00:02:43,629 --> 00:02:53,769
+equal to this would be functional
+component which returns regular button
+
+28
+00:02:53,769 --> 00:03:03,680
+and I would say I am one okay and it
+would have styles but let's just first
+
+29
+00:03:03,680 --> 00:03:16,010
+export it so export default button what
+alright so we can use it so inside my
+app component all I have to do is I get
+
+30
+00:03:18,470 --> 00:03:24,229
+import components and inside I would
+have a button one right so now I can use
+
+31
+00:03:24,229 --> 00:03:33,650
+it here button one and I don't have to
+do anything here right now so let's see
+
+32
+00:03:33,650 --> 00:03:39,109
+how it complains all right so I have
+this button right now it's normal but
+
+33
+00:03:39,109 --> 00:03:44,239
+let's add some style to it and I had to
+add react here because it won't work
+
+34
+00:03:44,239 --> 00:03:51,799
+without it okay so let's some add some
+styles so for that I can have some style
+
+35
+00:03:51,799 --> 00:03:58,939
+object inside so let's say Const styles
+equal to and I'm gonna have some
+
+36
+00:03:58,939 --> 00:04:04,639
+defaults so I have some background color
+which is like a grayish looking and I
+
+37
+00:04:04,639 --> 00:04:11,859
+can have some color which is kind of
+whitish looking and I can also add some
+
+38
+00:04:11,859 --> 00:04:21,380
+padding that's add ten pixels now here
+for the button we can have some styles
+
+39
+00:04:21,380 --> 00:04:28,220
+so I can just use this task so I can say
+styles dot
+
+40
+00:04:28,220 --> 00:04:40,650
+well style equal to and I can use styles
+dot default so this applies the the
+default styles to this button so my
+
+41
+00:04:43,530 --> 00:04:47,370
+button looks something like this is a
+grey background and some whitish color
+
+42
+00:04:47,370 --> 00:04:56,720
+alright so now what I want is from here
+I user should be able to pass let's say
+
+43
+00:04:56,720 --> 00:05:03,030
+disabled and it should pick a different
+style so it should show a disabled
+button with a disabled style it could be
+
+44
+00:05:05,070 --> 00:05:08,220
+one or multiple styles you know could
+have a different background color
+
+45
+00:05:08,220 --> 00:05:12,330
+different color it could have a
+different border and all that stuff
+right so how do I do that
+
+46
+00:05:14,479 --> 00:05:24,510
+so inside here I can have another sound
+call let's say this able okay so I have
+
+47
+00:05:24,510 --> 00:05:32,070
+to default and disabled now based on the
+prop disabled I'm gonna make that
+
+48
+00:05:32,070 --> 00:05:38,370
+decision here so instead of picking a
+default style I wanna pick pick disabled
+
+49
+00:05:38,370 --> 00:05:42,030
+style but remember I also want the
+padding here so I don't want to
+completely pick the disabled I just want
+
+50
+00:05:44,760 --> 00:05:52,020
+to override the background color and
+color so what I can do here is since I
+
+51
+00:05:52,020 --> 00:05:59,910
+would get some props here right I can
+say if props has disabled so so I can
+
+52
+00:05:59,910 --> 00:06:13,490
+say if prompts has disabled then I want
+to overwrite this this into here right
+
+53
+00:06:13,490 --> 00:06:25,530
+what I need to do is have some local
+variable Const let's say styles equal to
+so this would be styles dot and I can
+
+54
+00:06:32,520 --> 00:06:44,130
+use a spread operator so I could copy
+all the values right here I can say
+
+55
+00:06:44,130 --> 00:07:00,630
+underscore styles equal to I can keep
+all the styles and overwrite it with
+
+56
+00:07:00,630 --> 00:07:10,180
+this style start disabled so I can say
+styles dot disabled and I can spread as
+
+57
+00:07:10,180 --> 00:07:17,770
+well all right so this Styles would have
+this background color discolor
+
+58
+00:07:17,770 --> 00:07:22,870
+and padding from here so basically
+create a copy here
+
+59
+00:07:22,870 --> 00:07:28,180
+so this which they should have this
+three styles and then it would override
+
+60
+00:07:28,180 --> 00:07:36,040
+this two here right and all I have to do
+it just simply use underscore style here
+
+61
+00:07:36,040 --> 00:07:41,920
+yeah underscore style sexually all right
+so now I can see this button which looks
+
+62
+00:07:41,920 --> 00:07:47,740
+like disabled what if you have another
+button which also requires same disabled
+
+63
+00:07:47,740 --> 00:07:52,480
+I'd also need needs to have a same
+mechanic mechanism to override it so I
+
+64
+00:07:52,480 --> 00:07:56,560
+don't want to lock right this logic in
+every single component I need to move
+
+65
+00:07:56,560 --> 00:08:02,920
+this out into some function which is a
+higher-order component so let's do it
+
+66
+00:08:02,920 --> 00:08:10,120
+so what I'll do here is create a new
+folder I'm gonna call it hoc which means
+
+67
+00:08:10,120 --> 00:08:18,580
+higher-order component and let's create
+a file called a wrapper jeaious and also
+
+68
+00:08:18,580 --> 00:08:24,430
+what we can do is we can remove this
+dönitz from the button one and move it
+
+69
+00:08:24,430 --> 00:08:33,130
+to somewhere let's say create a new
+folder called styles and inside here we
+
+70
+00:08:33,130 --> 00:08:44,830
+can have a new file call common style
+start yes okay and here I can have the
+
+71
+00:08:44,830 --> 00:08:53,980
+same one and
+I can export it export default styles
+
+72
+00:08:53,980 --> 00:08:59,890
+so now styles are coming from this
+common styles it's no longer inside this
+
+73
+00:08:59,890 --> 00:09:02,620
+button and I don't want to import it
+here as well
+
+74
+00:09:02,620 --> 00:09:06,550
+I want to keep this clean I want to
+import in Titus inside this style
+
+75
+00:09:06,550 --> 00:09:16,390
+wrapper all right so let's first import
+common styles from and this is actually
+
+76
+00:09:16,390 --> 00:09:27,209
+one level up so styles and common styles
+all right now how do we build this
+
+77
+00:09:27,209 --> 00:09:32,410
+higher-order component so this function
+would take an argument as a component so
+
+78
+00:09:32,410 --> 00:09:43,029
+let's call this the wrapped component if
+I want to use this inside let's say
+
+79
+00:09:43,029 --> 00:09:51,250
+button 1 then what I would do is I would
+have to say import style wrapper I need
+
+80
+00:09:51,250 --> 00:09:53,320
+to import the Sai wrappers that we just
+created
+
+81
+00:09:53,320 --> 00:10:02,620
+it's called styles wrapper I guess from
+and again it's like a one level up so
+
+82
+00:10:02,620 --> 00:10:14,260
+it's hoc slash sty wrapper right and
+then what we export this button in terms
+
+83
+00:10:14,260 --> 00:10:22,180
+of exporting just a button we can just
+wrap it with this sty wrapper alright so
+
+84
+00:10:22,180 --> 00:10:26,440
+as we can see taking this component
+which we are passing so we are passing
+
+85
+00:10:26,440 --> 00:10:30,370
+button wrapper to the style wrapper
+right so which is happening here now
+
+86
+00:10:30,370 --> 00:10:38,829
+what we want to do is we want to take
+its prompts and then we want to look at
+
+87
+00:10:38,829 --> 00:10:42,839
+the same thing we did India the
+component where we look at the props
+
+88
+00:10:42,839 --> 00:10:48,399
+look at the disable and if it's disabled
+then we want to build some styles based
+
+89
+00:10:48,399 --> 00:10:53,440
+on the disable status right so let's
+build that function separately so we
+
+90
+00:10:53,440 --> 00:10:59,840
+don't have to you know deal with it here
+so I'm gonna call this function
+
+91
+00:10:59,840 --> 00:11:05,940
+translate props because that's what were
+you doing right yeah translating we are
+
+92
+00:11:05,940 --> 00:11:09,830
+passing some props and we are
+translating so this will take some
+
+93
+00:11:09,830 --> 00:11:24,390
+prompts if our props has disabled and
+paste this should be done outside so the
+
+94
+00:11:24,390 --> 00:11:29,940
+first thing you want to do we want to
+take the common sounds to be inside
+
+95
+00:11:29,940 --> 00:11:35,940
+I'll Sofia we have common styles and
+then if the props has a disabled
+
+96
+00:11:35,940 --> 00:11:45,240
+property then we would take the styles
+and it's override disabled on a foreign
+
+97
+00:11:45,240 --> 00:11:50,670
+right now remember additional to
+disabled we want to add some stance
+
+98
+00:11:50,670 --> 00:11:57,800
+right so here we need to create a new
+prop so I can say new prompts equal to
+
+99
+00:11:57,800 --> 00:12:06,540
+we take the original props so this would
+have what so this would have only one
+
+100
+00:12:06,540 --> 00:12:13,530
+prop which is to say body put it show
+and then we add styles to it so we can
+
+101
+00:12:13,530 --> 00:12:25,970
+say styles equal to underscore styles
+and then we return then you prompt
+
+102
+00:12:25,970 --> 00:12:32,100
+ok so we take the prop which is disabled
+equal to true we translate it to some
+
+103
+00:12:32,100 --> 00:12:38,190
+styles and then we we also pass we are
+already passing this component into this
+
+104
+00:12:38,190 --> 00:12:49,550
+function right so we need to return a
+function is we're gonna call it wrapped
+render and it will take it will have an
+
+105
+00:12:52,890 --> 00:13:00,450
+argument color args and then we're gonna
+return the same function same component
+
+106
+00:13:00,450 --> 00:13:10,410
+back with the translated props so we can
+say return translated from the original
+props
+
+107
+00:13:11,570 --> 00:13:17,230
+takes the crops of a component
+translated and then this returns the new
+
+108
+00:13:17,230 --> 00:13:25,130
+component right that's that's all it
+does and inside the button one what we
+
+109
+00:13:25,130 --> 00:13:31,910
+want to do here is we don't want all of
+these here and instead of styles we can
+
+110
+00:13:31,910 --> 00:13:43,250
+now call it based on prop start styles
+since we are passing the starts we are
+
+111
+00:13:43,250 --> 00:13:48,440
+adding added the new prop called silence
+here right so it will be available now
+
+112
+00:13:48,440 --> 00:13:52,730
+one thing I need to do okay so this one
+disabled there's no Styles here so we
+
+113
+00:13:52,730 --> 00:13:59,420
+need to have a common styles died
+disables because we are great getting it
+from the common stance oh this should be
+
+114
+00:14:01,850 --> 00:14:08,420
+actually prompt start Styles not this
+dot process out all right so it works so
+I have a disabled button and it works
+
+115
+00:14:12,290 --> 00:14:18,800
+beautifully so here now my button one
+looks so simple and this is how it's
+
+116
+00:14:18,800 --> 00:14:24,110
+supposed to look like without any lock
+logic inside you know all the logic is
+
+117
+00:14:24,110 --> 00:14:32,269
+now moved to this sty wrapper and so if
+I create another button - I just have to
+
+118
+00:14:32,269 --> 00:14:39,800
+simply wrap the button - with Sai
+wrapper and and you can also pass a
+
+119
+00:14:39,800 --> 00:14:47,120
+disabled prop inside and it would pick
+the disabled sod for that button so this
+
+120
+00:14:47,120 --> 00:14:50,600
+is really cool
+by the way I will upload this example
+
+121
+00:14:50,600 --> 00:14:56,089
+onto my get site so you can look at it
+and play around with it and by the way
+
+122
+00:14:56,089 --> 00:15:01,519
+this is much larger series and react if
+you haven't been following it I'll
+
+123
+00:15:01,519 --> 00:15:07,670
+provide a link to the playlist so where
+you can see all the tutorials from the
+
+124
+00:15:07,670 --> 00:15:11,449
+beginning to end and I hope you have
+learned something from this tutorial and
+
+125
+00:15:11,449 --> 00:15:16,189
+if you did please like don't forget her
+like subscribe and provide a nice
+
+126
+00:15:16,189 --> 00:15:21,470
+comment and you can actually help the
+channel via patreon and by donating few
+
+127
+00:15:21,470 --> 00:15:26,480
+dollars
+and you can also translate this video
+
+128
+00:15:26,480 --> 00:15:32,090
+into your native language so your
+countrymen can also learn it's very easy
+
+129
+00:15:32,090 --> 00:15:38,480
+actually I provided the description on
+how to do it inside the description of
+
+130
+00:15:38,480 --> 00:15:41,710
+the video and thank you
+
+1
+00:00:00,110 --> 00:00:06,060
+hey guys and girls today we're gonna
+look at pure components in react
+I think pure components is very
+
+2
+00:00:09,389 --> 00:00:13,019
+important to learn because if you
+understand pure components then you
+
+3
+00:00:13,019 --> 00:00:17,160
+would understand how the read rendering
+works in react and I think a lot of
+
+4
+00:00:17,160 --> 00:00:21,300
+people would ask in an interview about
+pure components because they know if you
+
+5
+00:00:21,300 --> 00:00:25,380
+can explain it you would understand how
+relearning works so I think it's
+important now so what is a pure
+
+6
+00:00:27,720 --> 00:00:35,010
+component I would say a component that
+never since that's a pure component well
+
+7
+00:00:35,010 --> 00:00:40,530
+jokes apart in react when you call set
+state method the read rendering would
+
+8
+00:00:40,530 --> 00:00:46,649
+happen right and it's kind of blind it
+doesn't really look it have you ever
+
+9
+00:00:46,649 --> 00:00:51,690
+really changed the value or not it just
+does it blindly but sometime these
+
+10
+00:00:51,690 --> 00:00:56,969
+updates are not needed and that is a sin
+and so we can fix it with a pure
+
+11
+00:00:56,969 --> 00:01:02,399
+component so let's look at these pure
+components and how to use it and where
+
+12
+00:01:02,399 --> 00:01:17,400
+to use it and welcome to Texas tutorials
+[Music]
+
+13
+00:01:20,170 --> 00:01:27,140
+all right so I have created a project
+using create react app and inside the
+
+14
+00:01:27,140 --> 00:01:30,260
+source folder I have this main app
+component and this is what we're gonna
+
+15
+00:01:30,260 --> 00:01:35,090
+do our work and I like to keep things
+simpler you know so if you want to
+
+16
+00:01:35,090 --> 00:01:39,950
+explain a very concept a very complex
+concept like a pure component then you
+
+17
+00:01:39,950 --> 00:01:44,270
+need to have a very simple project like
+a bare minimum so you can so people can
+understand I know a lot of tutorials
+
+18
+00:01:46,040 --> 00:01:52,070
+I've seen where they actually have so
+much code to explain a complex concept
+and it doesn't really work so I'm gonna
+
+19
+00:01:54,830 --> 00:01:59,170
+do this right so what we're gonna do is
+we're gonna create a simple component
+
+20
+00:01:59,170 --> 00:02:08,929
+where we can run the set state method
+and but we can set the same value and
+
+21
+00:02:08,929 --> 00:02:15,590
+we're gonna look at how it renders every
+time we do it and then we're gonna have
+
+22
+00:02:15,590 --> 00:02:20,540
+a solution using pure components where
+we can actually avoid that we render
+
+23
+00:02:20,540 --> 00:02:28,970
+okay alright so here I'm going to have a
+function component so it's name is going
+
+24
+00:02:28,970 --> 00:02:35,120
+to be temp and obviously it's an error
+function if you don't know what the
+
+25
+00:02:35,120 --> 00:02:38,239
+function components are I have a
+tutorial on it I'll provide a link here
+
+26
+00:02:38,239 --> 00:02:44,900
+basically you would have some props and
+inside it should be very simple so it
+
+27
+00:02:44,900 --> 00:02:52,100
+would return some day of props dot test
+now we haven't actually created this
+
+28
+00:02:52,100 --> 00:03:00,440
+state here which we're gonna do it here
+so inside here let's create our state so
+
+29
+00:03:00,440 --> 00:03:06,290
+state equal to now we're gonna have a
+simple state so it's gonna have a level
+
+30
+00:03:06,290 --> 00:03:13,310
+called Val and its value it's going to
+be one okay very simple I should not be
+
+31
+00:03:13,310 --> 00:03:21,500
+here all right and inside here I can use
+the component that I created temp and I
+
+32
+00:03:21,500 --> 00:03:27,940
+can pass the devel inside here I can say
+well equal to
+
+33
+00:03:27,940 --> 00:03:38,360
+this dot state dot well alright so I'm
+passing this Val it's receiving it this
+
+34
+00:03:38,360 --> 00:03:45,220
+should be well here
+now let's render this so fire on NPM
+start alright so I'm getting this one
+
+35
+00:03:48,860 --> 00:03:55,760
+here which is nothing but this well now
+let's pick a scenario so for example
+let's say if your application is a
+
+36
+00:03:58,640 --> 00:04:07,310
+displaying score of a football game now
+it needs to pull the score every few
+
+37
+00:04:07,310 --> 00:04:11,989
+seconds to see if it's changed right so
+it will it will do that and it would
+
+38
+00:04:11,989 --> 00:04:16,669
+update basically it has to run the set
+state whichever Scott new score comes in
+
+39
+00:04:16,668 --> 00:04:23,660
+and you would see the updated state and
+this so the dome also renders the new
+
+40
+00:04:23,660 --> 00:04:32,450
+score now as you know in the football
+game score hardly changes right so you
+might be getting the same same score
+
+41
+00:04:34,580 --> 00:04:41,900
+every time you pull but when you run the
+set state it would re render your
+
+42
+00:04:41,900 --> 00:04:48,950
+component anyway so let's create a
+situation where it has to do something
+
+43
+00:04:48,950 --> 00:04:53,360
+like this so usually if you want to make
+an AJAX call you have to do it in a
+
+44
+00:04:53,360 --> 00:05:00,430
+specific life cycle hook and the life
+cycle hook is is called component did
+
+45
+00:05:00,430 --> 00:05:08,930
+mount and this method executes after the
+component is rendered and so if you if
+
+46
+00:05:08,930 --> 00:05:14,419
+you want to make an AJAX call you can do
+it here and if you want to know more
+
+47
+00:05:14,419 --> 00:05:19,700
+about this lifecycle hooks in a previous
+tutorial occurred that and I can provide
+
+48
+00:05:19,700 --> 00:05:23,240
+a link here so you would understand
+better but basically it's a hook that
+
+49
+00:05:23,240 --> 00:05:29,450
+runs one time after the component is
+mounted so in order to simulate the
+
+50
+00:05:29,450 --> 00:05:34,430
+poling what I can do I can run a set
+timeout or set interval should I say
+
+51
+00:05:34,430 --> 00:05:41,910
+inside here I can run the set set state
+so I can say this dot set state and we
+
+52
+00:05:41,910 --> 00:05:46,650
+know that the stayed current the value
+is 1 so what I'm gonna do I'm gonna set
+the same state again so it would be the
+
+53
+00:05:49,590 --> 00:05:58,290
+turn val is 1 and for the set interval i
+want to put let's say 2 second polling
+
+54
+00:05:58,290 --> 00:06:04,110
+so every 2 second it would set the state
+now let's look at it what happens ok in
+
+55
+00:06:04,110 --> 00:06:08,670
+order to check what happens we need to
+put some console.log so we can figure
+
+56
+00:06:08,670 --> 00:06:15,450
+out when it renders so one one console
+like i wanna put it is here render app
+
+57
+00:06:15,450 --> 00:06:22,230
+i'm also going to put one render method
+one console.log here this would be
+
+58
+00:06:22,230 --> 00:06:29,550
+rendered temp okay so we will know
+exactly what's happening as you can see
+
+59
+00:06:29,550 --> 00:06:35,340
+it's rendering app temp every two second
+even though the value hasn't changed yet
+as i said because the set state method
+
+60
+00:06:37,530 --> 00:06:41,610
+is kind of blind it doesn't check the
+value that's why it's happening so how
+
+61
+00:06:41,610 --> 00:06:48,330
+do you fix this one way to do it is
+without using pure component to fix this
+the one solution is just before
+
+62
+00:06:52,110 --> 00:06:57,930
+component renders there is another life
+cycle hook call should-should component
+
+63
+00:06:57,930 --> 00:07:04,860
+update there we can make a decision to
+render or not based on the state itself
+
+64
+00:07:04,860 --> 00:07:12,300
+so let's do it here should component
+update all right so this function has
+
+65
+00:07:12,300 --> 00:07:20,990
+two arguments one is next prop and
+second is next state so what is next
+
+66
+00:07:20,990 --> 00:07:26,880
+state means whichever the when I call
+the set state whichever the next state
+
+67
+00:07:26,880 --> 00:07:32,430
+is it's gonna pass me here and I already
+have the the current state so what I can
+
+68
+00:07:32,430 --> 00:07:38,220
+do it I can compare them to find out if
+has changed or not so if it if it has
+
+69
+00:07:38,220 --> 00:07:42,330
+not changed then I don't need to do
+render if I then I will return false
+here and if I had returned false here
+
+70
+00:07:45,120 --> 00:07:50,880
+then it would not render by return to
+true then you should render so what I
+
+71
+00:07:50,880 --> 00:08:03,130
+can do here is return
+I could say this dot state equal to next
+
+72
+00:08:03,130 --> 00:08:13,190
+state then I wanna don't wanna render
+else I wanna render right and I can also
+
+73
+00:08:13,190 --> 00:08:25,360
+print the next stake here so I can say
+console.log next state and console law
+
+74
+00:08:25,360 --> 00:08:37,460
+this dot state then we can put here so
+that we would know next state and here
+
+75
+00:08:37,460 --> 00:08:47,360
+we can say current state alright so if I
+save it and run it let's see what
+
+76
+00:08:47,360 --> 00:08:52,310
+happens so the thing is because it will
+it surrenders that is because I'm
+comparing the objects so the objects are
+
+77
+00:08:59,180 --> 00:09:04,430
+different so what I need to do is
+compare the value itself so if I do dot
+
+78
+00:09:04,430 --> 00:09:10,090
+Val here then the value should be the
+same and you should stop rendering
+
+79
+00:09:10,090 --> 00:09:16,430
+alright as you can see it prints the
+value but it doesn't really render so
+those two console logs are gone so
+
+80
+00:09:18,640 --> 00:09:23,360
+that's what we want so this is how it
+really you can actually stop it from
+
+81
+00:09:23,360 --> 00:09:32,300
+rendering so now your football score is
+updated but it's not read entering now
+let's say if I instead of one if my
+
+82
+00:09:35,900 --> 00:09:44,960
+football score was let's say I do math
+dot random which mean is gonna produce
+
+83
+00:09:44,960 --> 00:09:49,820
+random numbers then every time I'm
+getting I'm getting hopefully every time
+
+84
+00:09:49,820 --> 00:09:57,290
+I'm gonna get a new number so in this
+case as you can see here so in that case
+it's always the tenders because I'm
+
+85
+00:09:59,900 --> 00:10:07,040
+getting different value every time right
+which we want but if the same value
+
+86
+00:10:07,040 --> 00:10:12,300
+happens I don't
+so this is one way to do it
+
+87
+00:10:12,300 --> 00:10:19,260
+but there is a better way using pure
+components so if I if I use a pure
+
+88
+00:10:19,260 --> 00:10:23,670
+component then I should not be using I
+should not be using should component
+
+89
+00:10:23,670 --> 00:10:27,150
+update hook because it's kind of
+redundant why am I making a decision
+
+90
+00:10:27,150 --> 00:10:31,830
+here or here so since I'm using pure
+component I should just comment this
+
+91
+00:10:31,830 --> 00:10:40,050
+this guy out here I have a class app
+extends component instead it should
+extend pure component and I need to
+
+92
+00:10:43,980 --> 00:10:50,880
+still get the pure component from here
+so I would say pure component so I need
+
+93
+00:10:50,880 --> 00:10:56,220
+to import it which is part of the
+reactor insert of the random value here
+
+94
+00:10:56,220 --> 00:11:04,140
+I'm just gonna put back our 1 which
+means always update the same value so
+
+95
+00:11:04,140 --> 00:11:11,610
+let's see what happens all right as you
+can see if i refresh it i would get two
+
+96
+00:11:11,610 --> 00:11:16,860
+renders this is the early render and
+there is no revenge ring happy so this
+
+97
+00:11:16,860 --> 00:11:23,210
+is how the magic works now there is an
+important point to be notice here
+
+98
+00:11:23,210 --> 00:11:31,790
+don't use pure components just anywhere
+it's quite dangerous to use it without
+knowing your state and the reason why is
+
+99
+00:11:38,240 --> 00:11:43,680
+let's say if you are if you have a much
+I mean we have a simple state here but
+let's say feel a much bigger state where
+
+100
+00:11:46,830 --> 00:11:50,970
+you have a nested components within
+nested components what what pure
+
+101
+00:11:50,970 --> 00:11:57,270
+component does is it does a shallow
+compared what shadow compare is it just
+
+102
+00:11:57,270 --> 00:12:03,720
+compares the object so reference so
+previous state and the current state
+
+103
+00:12:03,720 --> 00:12:09,450
+should have the same reference if it's
+if it's the same reference then it
+
+104
+00:12:09,450 --> 00:12:14,660
+thinks that it nothing has changed but
+let's say if you have a much larger
+component tree something could have
+
+105
+00:12:17,250 --> 00:12:21,089
+changed let's say if somebody pushed
+another
+
+106
+00:12:21,089 --> 00:12:28,089
+element two into an array somewhere at
+the leaf level component the main
+
+107
+00:12:28,089 --> 00:12:32,499
+component would think or nothing has
+happened so it would not even render it
+
+108
+00:12:32,499 --> 00:12:37,449
+and what would happen is that if you
+don't if you're not rendering the the
+top level component then nothing would
+
+109
+00:12:39,249 --> 00:12:44,829
+get rerender because it think that
+nothing has changed which is quite
+dangerous so places you want to use this
+
+110
+00:12:47,829 --> 00:12:53,799
+is exactly like this where you have
+probably a leaf node where you know your
+
+111
+00:12:53,799 --> 00:12:58,119
+state is similar to this and it's not
+very complex all right so that's about
+
+112
+00:12:58,119 --> 00:13:02,980
+it folks I'll I'll put the code on the
+github site and provide the link in the
+
+113
+00:13:02,980 --> 00:13:08,739
+description and I'm trying to move this
+course as much as possible so if you
+
+114
+00:13:08,739 --> 00:13:14,350
+have any suggestions on the future topic
+please suggest to me so that I can make
+
+115
+00:13:14,350 --> 00:13:17,739
+those tutorials
+otherwise I'll just you know go with my
+
+116
+00:13:17,739 --> 00:13:21,879
+flock all right so I hope you learned
+something from this tutorial if you did
+
+117
+00:13:21,879 --> 00:13:27,669
+please like subscribe provide a nice
+comment and you can help me to help the
+
+118
+00:13:27,669 --> 00:13:34,169
+channel via patreon I'll provide a link
+here and thank you
+
+1
+00:00:01,280 --> 00:00:07,919
+this is react cast episode 12
+server-side rendering server-side
+rendering means rendering your react
+
+2
+00:00:10,170 --> 00:00:14,730
+components on the server before sending
+them to the browser and what is the
+
+3
+00:00:14,730 --> 00:00:19,830
+advantage of that you say well in a
+regular setup the server would usually
+
+4
+00:00:19,830 --> 00:00:25,619
+send a blank HTML page that would be
+populated by react on the browser that
+
+5
+00:00:25,619 --> 00:00:30,090
+is once the JavaScript file containing
+both react and your application code
+
+6
+00:00:30,090 --> 00:00:35,880
+downloads and runs server rendering
+react components can lead to a better
+
+7
+00:00:35,880 --> 00:00:41,520
+user experience and in some cases better
+search engine discoverability instead of
+
+8
+00:00:41,520 --> 00:00:46,230
+sending a blank page and letting the
+browser do all the work we can render
+your components on the server into a
+
+9
+00:00:48,270 --> 00:00:53,250
+static markup a page containing
+pre-populated data is then sent to the
+
+10
+00:00:53,250 --> 00:00:58,070
+browser
+when JavaScript runs reacts with mulcher
+
+11
+00:00:58,070 --> 00:01:02,630
+components realize that there is a ready
+sent content in the page and just take
+
+12
+00:01:02,630 --> 00:01:08,080
+over from that point on adding front-end
+interactivity sounds nice doesn't it
+
+13
+00:01:08,080 --> 00:01:13,880
+that's only possible because the reactor
+library itself is isomorphic also known
+
+14
+00:01:13,880 --> 00:01:18,800
+as Universal which means that it does
+not contain browser specific code it's
+
+15
+00:01:18,800 --> 00:01:24,470
+JavaScript can run both on the browser
+and on the server now the react don't
+
+16
+00:01:24,470 --> 00:01:30,440
+package does contain a browser specific
+function render but it also contains a
+
+17
+00:01:30,440 --> 00:01:35,180
+render to string function that we can
+use on the server to generate static
+
+18
+00:01:35,180 --> 00:01:41,210
+markup and that's the main ingredient in
+this recipe but before you get cooking I
+have coding there's one very important
+
+19
+00:01:43,580 --> 00:01:50,030
+aspect to consider compiling and module
+systems you see it's not commonplace to
+
+20
+00:01:50,030 --> 00:01:54,890
+have a beautician going on on the front
+end we start with a module bundle which
+
+21
+00:01:54,890 --> 00:01:59,600
+allows us to split our project into
+multiple individual modules and a
+
+22
+00:01:59,600 --> 00:02:02,810
+compiler that allows us to use things
+like JSX
+
+23
+00:02:02,810 --> 00:02:06,979
+which is not standard javascript you
+know because the compiler will transform
+
+24
+00:02:06,979 --> 00:02:12,830
+it into plain JavaScript function calls
+for us in the react world web pack is
+
+25
+00:02:12,830 --> 00:02:18,350
+the most popular module bundler and
+Babel is the most popular compiler even
+if you're using tools like create react
+
+26
+00:02:20,299 --> 00:02:24,950
+app web pack and Babel are used together
+under the scenes to generate your
+bundled JavaScript file on the back end
+
+27
+00:02:28,130 --> 00:02:31,730
+the story is different
+we usually have more control over the
+
+28
+00:02:31,730 --> 00:02:35,750
+environment you know we don't have to
+compile a code to support a multitude of
+
+29
+00:02:35,750 --> 00:02:39,380
+possible browser vendors and versions
+and nodejs which is the server
+
+30
+00:02:39,380 --> 00:02:45,110
+technology we're going to use already
+has a built in module system but well
+
+31
+00:02:45,110 --> 00:02:51,049
+when the react components on the server
+including JSX is a different piece we
+
+32
+00:02:51,049 --> 00:02:55,519
+will need to include at least a compiler
+because once again JSX
+
+33
+00:02:55,519 --> 00:03:01,940
+is not valid JavaScript it needs to be
+compiled talking about modules note does
+
+34
+00:03:01,940 --> 00:03:07,220
+have a built-in module system but it's
+not the same es6 module system use it on
+
+35
+00:03:07,220 --> 00:03:10,650
+the front end
+they are mostly compatible and if you
+
+36
+00:03:10,650 --> 00:03:16,440
+want you can use be able to transform
+any es6 module related code into notes
+
+37
+00:03:16,440 --> 00:03:22,230
+module code it will work but it will
+have to settle down with a limited set
+
+38
+00:03:22,230 --> 00:03:27,030
+of functionalities especially comparing
+two things that webpack enables like
+
+39
+00:03:27,030 --> 00:03:32,580
+importing CSS and image files directly
+from your javascript code if you want
+
+40
+00:03:32,580 --> 00:03:37,440
+the whole package then yes you will have
+to use webpack to bundle your server
+files as well alright we're not talking
+
+41
+00:03:40,680 --> 00:03:45,720
+let's get to some code i want to code my
+components just like I would do if I
+
+42
+00:03:45,720 --> 00:03:50,820
+were using create react app you know
+importing CSS in image files so my
+
+43
+00:03:50,820 --> 00:03:55,230
+solution will include a build step for
+server files using both Babel and web
+
+44
+00:03:55,230 --> 00:03:59,430
+pack but first let me guide you through
+the simple project I already have in
+
+45
+00:03:59,430 --> 00:04:04,380
+place here I have a public folder where
+the bundled javascript file and other
+
+46
+00:04:04,380 --> 00:04:10,760
+assets will be saved into my search
+folder contains three subfolders browser
+
+47
+00:04:10,760 --> 00:04:17,280
+server and shared my react components
+will actually live in the shared folder
+
+48
+00:04:17,279 --> 00:04:21,959
+sis they will render on both the browser
+and the server let me open my app
+
+49
+00:04:21,959 --> 00:04:27,270
+components here pretty straightforward
+as you can see it imports CSS and image
+
+50
+00:04:27,270 --> 00:04:32,340
+and renders a markup the main index file
+on both browser and server are empty
+
+51
+00:04:32,340 --> 00:04:38,490
+before working on them we have to set up
+our beautiful backpack I have already
+
+52
+00:04:38,490 --> 00:04:43,260
+styled react and react them so I will
+start by installing the dev dependencies
+
+53
+00:04:43,260 --> 00:04:50,370
+I will install wetback and they will
+core our two tools on this build process
+
+54
+00:04:50,370 --> 00:04:57,330
+I also installed babel loader which
+allows them to work together now both
+
+55
+00:04:57,330 --> 00:05:02,100
+web pack babel need additional package
+for every feature we want to enable in
+
+56
+00:05:02,100 --> 00:05:06,360
+our code such as support for JSX
+new javascript language features
+
+57
+00:05:06,360 --> 00:05:11,850
+importing asset files and so on to
+create a similar experience that create
+
+58
+00:05:11,850 --> 00:05:18,630
+react app provides we need to install
+babel preset react app file loader for
+
+59
+00:05:18,630 --> 00:05:24,190
+asset files CSS loader for
+ss all CSS loader in it's bugging
+
+60
+00:05:24,190 --> 00:05:30,730
+autoprefixer and finally extract text
+webpack plug-in yeah it's a long list
+
+61
+00:05:30,730 --> 00:05:34,660
+but you can get the full transcript at
+the react guest repo the link is on the
+
+62
+00:05:34,660 --> 00:05:40,060
+screen moving on webpack automatically
+search for a configuration file name is
+
+63
+00:05:40,060 --> 00:05:46,470
+webpack config yes I already have one
+with some bare-bones imports and exports
+
+64
+00:05:46,470 --> 00:05:51,820
+we need two configurations one to bundle
+client-side JavaScript for the browser
+and one to bundle server code as you can
+
+65
+00:05:54,940 --> 00:05:59,260
+see we can export an array of
+configurations and web pack will run all
+
+66
+00:05:59,260 --> 00:06:03,340
+of them my browser configuration is
+already pointing to the correct entry
+
+67
+00:06:03,340 --> 00:06:09,880
+file it's generating files on the public
+folder my server configuration is also
+
+68
+00:06:09,880 --> 00:06:14,530
+already pointing to the server's index
+dot Jes but notice that it has some
+
+69
+00:06:14,530 --> 00:06:22,360
+additional information to target nodejs
+and use its module system let's start by
+
+70
+00:06:22,360 --> 00:06:26,860
+adding configuration on the module
+object first I need JavaScript files to
+
+71
+00:06:26,860 --> 00:06:32,080
+be compiled so I will include all files
+with the J's extension by learning the
+node modules folder these files will be
+
+72
+00:06:35,110 --> 00:06:38,010
+loaded by Babel
+
+73
+00:06:38,440 --> 00:06:46,039
+the exact same configuration applies to
+the server back to the browser
+
+74
+00:06:46,039 --> 00:06:51,169
+configuration I want to be able to
+import image files to do that I will
+
+75
+00:06:51,169 --> 00:06:55,910
+paste the required loader here as you
+can see it tests for common image file
+
+76
+00:06:55,910 --> 00:07:00,830
+extensions if it finds any import
+statements for these file types it will
+copy the actual file to the public
+
+77
+00:07:03,050 --> 00:07:08,449
+folder and return its URL
+I will not dive into many details here
+
+78
+00:07:08,449 --> 00:07:11,900
+because the focus of this show is on
+natural code and not web back
+configuration details but I will link to
+
+79
+00:07:14,509 --> 00:07:17,870
+the documentation on the show notes and
+on the repple if you want to learn more
+
+80
+00:07:17,870 --> 00:07:23,930
+for style sheets I will actually start
+by using the extract text plug-in which
+
+81
+00:07:23,930 --> 00:07:29,310
+will gather all imported CSS and bundle
+them into a single file
+
+82
+00:07:29,310 --> 00:07:34,740
+then we use the CSS loader
+
+83
+00:07:35,610 --> 00:07:42,689
+and also post CSS loader Oh CSS is not
+required to work up CSS but it's very
+
+84
+00:07:42,689 --> 00:07:47,699
+common in the react world you can think
+of it as a CSS transformer there are
+
+85
+00:07:47,699 --> 00:07:51,750
+lots of transformation plugins available
+and I'm using the same one that create
+
+86
+00:07:51,750 --> 00:07:56,610
+react app uses by default autoprefixer
+that well automatically adds vendor
+
+87
+00:07:56,610 --> 00:08:03,810
+prefixes to your CSS rules as I just
+said notice that both stylesheet and
+
+88
+00:08:03,810 --> 00:08:08,370
+image configurations will save extra
+files into the public folder when my
+
+89
+00:08:08,370 --> 00:08:13,409
+pack runs the file loader does that
+automatically but I need to finish the
+
+90
+00:08:13,409 --> 00:08:18,509
+extract text configuration by having the
+plug-in with the desired file name good
+
+91
+00:08:18,509 --> 00:08:23,689
+the browser configuration is done let's
+move to the server configuration again
+
+92
+00:08:23,689 --> 00:08:28,979
+because I ran the react components on
+the server I also need the same file and
+stylesheet loaders in my server
+
+93
+00:08:30,719 --> 00:08:35,399
+configuration as well but I do not want
+to actually generate the files and copy
+
+94
+00:08:35,399 --> 00:08:39,750
+them to the public folders again right
+that would be a waste of resources and
+
+95
+00:08:39,750 --> 00:08:44,459
+time fortunately that can give done with
+small changes in the original
+
+96
+00:08:44,459 --> 00:08:51,300
+configurations I will begin by copying
+the file loader and simply adding Amit
+
+97
+00:08:51,300 --> 00:08:56,750
+false which means do not copy the files
+
+98
+00:09:01,710 --> 00:09:07,110
+now the stylesheets configuration can be
+radically simplified since I don't want
+
+99
+00:09:07,110 --> 00:09:11,580
+to generate files I can get rid of
+extract effects plugging
+
+100
+00:09:11,580 --> 00:09:17,160
+and post CSS the CSS loader
+configuration states because the server
+still needs to be aware of CSS imports
+
+101
+00:09:19,589 --> 00:09:24,060
+without actually using them this can be
+done by changing the loader to a
+different path locals this configuration
+
+102
+00:09:26,880 --> 00:09:31,890
+is rather smart and as a side note it is
+also compatible with CSS modules in
+
+103
+00:09:31,890 --> 00:09:35,610
+which case it will make sure to generate
+the correct class names on the server
+
+104
+00:09:35,610 --> 00:09:40,920
+and place them in your components when
+rendering that's basically it we have a
+
+105
+00:09:40,920 --> 00:09:45,720
+build set up there are lots of room for
+improvement here we could do a literary
+
+106
+00:09:45,720 --> 00:09:49,920
+factor to avoid repetition most
+importantly split the configuration
+files to create not only a production
+
+107
+00:09:51,930 --> 00:09:55,800
+specific config but also a development
+one where the files are severed from
+
+108
+00:09:55,800 --> 00:10:00,360
+memory instead of copied but I'll leave
+it as is for now to focus on actual code
+
+109
+00:10:00,360 --> 00:10:05,970
+all right we are more than halfway
+through hanging there let's focus on the
+
+110
+00:10:05,970 --> 00:10:11,519
+browser and server codes let's start
+with the easy one the browser nothing
+
+111
+00:10:11,519 --> 00:10:17,370
+new here o import react import the
+render function from react Dom and
+
+112
+00:10:17,370 --> 00:10:26,640
+import my app components then I'll use
+render my app component in documents get
+
+113
+00:10:26,640 --> 00:10:33,420
+element by ID root that's all now let's
+move to the interesting part the server
+
+114
+00:10:33,420 --> 00:10:38,730
+I need to create an HTTP server and to
+make it easier I will install Express
+
+115
+00:10:38,730 --> 00:10:44,190
+which is the most popular server
+framework for nodejs in my servers index
+
+116
+00:10:44,190 --> 00:10:52,890
+dot j has file i will import express our
+also import react from react but instead
+of importing the render method from
+
+117
+00:10:54,600 --> 00:11:01,339
+react dome I will import render to
+string from react don't slash server
+
+118
+00:11:01,339 --> 00:11:07,680
+finally how import the very same app
+components now I will create a new
+server by invoking Express and set it to
+
+119
+00:11:10,680 --> 00:11:14,310
+listen on some defined port or 3000 by
+default
+
+120
+00:11:14,310 --> 00:11:21,120
+let me go so log that the server is
+indeed running next I will instruct
+
+121
+00:11:21,120 --> 00:11:24,980
+Express to sir
+any static files from the public folder
+
+122
+00:11:24,980 --> 00:11:31,410
+finally for any other route
+I will render an HTML page when loaded
+
+123
+00:11:31,410 --> 00:11:34,170
+by the browser
+this page will fetch the browser's Balde
+
+124
+00:11:34,170 --> 00:11:40,380
+ojs and it will also contain a root leaf
+where react can mount these alone would
+
+125
+00:11:40,380 --> 00:11:44,370
+be enough for reacts run but the whole
+purpose of this episode is to send an
+
+126
+00:11:44,370 --> 00:11:49,200
+HTML file pre-populated with the
+rendered content right and now that we
+
+127
+00:11:49,200 --> 00:11:55,710
+have all the setup in place it's as easy
+as render to string app and that's all
+
+128
+00:11:55,710 --> 00:12:01,230
+the last piece that we are missing is I
+start script on package JSON I'll create
+
+129
+00:12:01,230 --> 00:12:08,070
+a start the script that does two things
+runs web back to bug both browser and
+
+130
+00:12:08,070 --> 00:12:14,760
+server files and browse the generated
+server file all of these in development
+mode
+
+131
+00:12:17,810 --> 00:12:24,930
+enough waiting let's test cool we have a
+react obligation pre-rendered on the
+
+132
+00:12:24,930 --> 00:12:30,240
+server to be a hundred percent sure that
+the HTML came indeed pre-rendered from
+
+133
+00:12:30,240 --> 00:12:33,720
+the server I will show the source code
+that was delivered to the browser
+
+134
+00:12:33,720 --> 00:12:38,730
+aha here it is the component was indeed
+rendered on the server and the page came
+
+135
+00:12:38,730 --> 00:12:44,430
+pre-populated so to recap when they
+react on the server can lead to a better
+user experience and in some cases better
+
+136
+00:12:47,370 --> 00:12:53,040
+search engine discoverability you will
+need to webpack configurations one to
+
+137
+00:12:53,040 --> 00:12:57,300
+bundle files for the browser and one for
+the server but while the browser
+
+138
+00:12:57,300 --> 00:13:01,830
+configuration we will actually generate
+a bundle image and CSS files into the
+
+139
+00:13:01,830 --> 00:13:06,720
+public folder the server configuration
+won't on the browser when JavaScript
+
+140
+00:13:06,720 --> 00:13:11,310
+runs reacts we realize that the
+component is already there and takeover
+forefront and interactivity skipping the
+
+141
+00:13:13,710 --> 00:13:19,020
+initial render moving forward there is
+still at least two essential topics
+
+142
+00:13:19,020 --> 00:13:24,360
+regarding server-side rendering complete
+react applications routing and data
+
+143
+00:13:24,360 --> 00:13:29,520
+fetching this episode is over but these
+topics will be covered on the next
+
+144
+00:13:29,520 --> 00:13:33,780
+episode so don't forget to subscribe and
+click on the bell icon to be notified
+
+145
+00:13:33,780 --> 00:13:39,450
+when it sells you just watched an
+episode of react gas all the source code
+
+146
+00:13:39,450 --> 00:13:45,210
+from this episode is available on github
+github.com slash gaseous and slash react
+
+147
+00:13:45,210 --> 00:13:49,860
+gas once again I'd like to give a big
+thanks to full-stack Academy of codes
+
+148
+00:13:49,860 --> 00:13:55,380
+for all the support you guys make this
+episode possible see you on the next
+
+149
+00:13:55,380 --> 00:13:59,430
+episode
+you
+
+1
+00:00:01,159 --> 00:00:07,859
+this reacts guests episode 13
+server-side rendering with data faction
+
+2
+00:00:07,859 --> 00:00:14,250
+and routing I will start this episode
+just where I left in the previous one so
+
+3
+00:00:14,250 --> 00:00:18,990
+if you haven't watched episode 12 you
+might want to watch it first the link is
+on the screen also I'm running mostly
+
+4
+00:00:22,020 --> 00:00:26,550
+the same code from the previous episode
+with two notable exceptions first I've
+
+5
+00:00:26,550 --> 00:00:30,539
+changed my main components now it's a
+new component
+
+6
+00:00:30,539 --> 00:00:37,530
+I also added an API endpoint it just
+returns a hard-coded JSON with some news
+
+7
+00:00:37,530 --> 00:00:42,719
+in a real web this data would come from
+the database but for this example this
+
+8
+00:00:42,719 --> 00:00:47,760
+will be enough I'm not going to use this
+API right now but I just wanted to
+mention that it exists again I'm
+
+9
+00:00:51,149 --> 00:00:57,030
+rendering the news component let me run
+my startup script and test this on the
+
+10
+00:00:57,030 --> 00:01:03,300
+browser good I have my wizard news page
+where I can get in format of the latest
+
+11
+00:01:03,300 --> 00:01:08,700
+trends in the magical world this page
+came pre-rendered from the server will
+
+12
+00:01:08,700 --> 00:01:13,020
+react mounted on the browser it's
+verified that the mark-up matches with
+its virtual Dom and skip it the first
+
+13
+00:01:15,689 --> 00:01:21,270
+render react also added from and
+interactivity so for example I can click
+
+14
+00:01:21,270 --> 00:01:27,420
+here to change the sorting by published
+data or apples but I don't really have
+
+15
+00:01:27,420 --> 00:01:33,630
+any actual news here just a few
+placeholders they are hard-coded
+
+16
+00:01:33,630 --> 00:01:39,750
+on my news components not being faxed so
+let's work on actual data fetching on
+
+17
+00:01:39,750 --> 00:01:45,180
+the server on a regular reaction
+occasion we would usually do data
+
+18
+00:01:45,180 --> 00:01:50,250
+fetching on component did mount but
+component dismounts only runs on the
+
+19
+00:01:50,250 --> 00:01:53,909
+browser and because I'm doing
+server-side rendering I want to fetch
+
+20
+00:01:53,909 --> 00:01:58,320
+the data on the server itself you know
+to send the page completely pre-rendered
+with all the news the reason why
+
+21
+00:02:00,630 --> 00:02:04,890
+component did mount doesn't run on the
+server is because I'm using render to
+
+22
+00:02:04,890 --> 00:02:10,110
+string which will synchronously end on a
+single pass it doesn't actually mount
+
+23
+00:02:10,110 --> 00:02:13,770
+the components need there waits for a
+synchronous operations
+
+24
+00:02:13,770 --> 00:02:19,260
+data fetching or even sad state for that
+matter so here's what I'm going to do
+before rendering to string the news
+
+25
+00:02:21,480 --> 00:02:27,030
+components I will fetch the data from
+the API let me stop hi so morphic fetch
+
+26
+00:02:27,030 --> 00:02:32,870
+which provides the same fetch API that
+browsers have on the server
+
+27
+00:02:32,870 --> 00:02:36,650
+okay I will import it
+
+28
+00:02:38,690 --> 00:02:50,670
+in sequence of that from my server / API
+/ news then the responses are JSON file
+
+29
+00:02:50,670 --> 00:02:56,750
+so dot JSON then I will get initial data
+back
+
+30
+00:02:56,750 --> 00:03:04,080
+let me read everything in this dot n and
+pass this initial data as props should
+
+31
+00:03:04,080 --> 00:03:10,860
+news inside the news component instead
+of using this placeholder I can actually
+
+32
+00:03:10,860 --> 00:03:17,040
+initialize the component state with
+props initial data while checking if the
+risk props to the initial data let me
+
+33
+00:03:20,280 --> 00:03:26,940
+test this great now I have a list of
+actual news and if I show the actual
+
+34
+00:03:26,940 --> 00:03:31,740
+source code I can see everything came
+pre-populated from the server but
+
+35
+00:03:31,740 --> 00:03:37,980
+there's a catch right now there's no
+interactivity on the browser if I click
+on the sorting options nothing happens
+
+36
+00:03:40,110 --> 00:03:45,180
+and if I pull my console here I have
+these nasty errors here here is what's
+
+37
+00:03:45,180 --> 00:03:50,250
+happening although the mark-up did came
+pre-populated from the server when react
+
+38
+00:03:50,250 --> 00:03:54,540
+maps the component on the browser it
+doesn't have the same data on its state
+
+39
+00:03:54,540 --> 00:03:58,860
+it builds a virtual Dom that doesn't
+match with the pre-populated markup that
+
+40
+00:03:58,860 --> 00:04:03,930
+came from the server so to fix this when
+I get the initial data from the API and
+
+41
+00:04:03,930 --> 00:04:08,640
+not only need to make it available to
+the component on the server I also need
+to make it available somehow to the
+
+42
+00:04:10,860 --> 00:04:15,480
+component when it reaches the browser
+there are quite a few possibilities here
+the simplest is just to open a new
+
+43
+00:04:18,000 --> 00:04:22,470
+script tag on the HTML that I'm sending
+to the browser and add a global variable
+
+44
+00:04:22,470 --> 00:04:29,340
+I'll call it window dot dunder initial
+data and it's going to be equal the same
+array of news
+
+45
+00:04:30,500 --> 00:04:38,490
+let me stringify it back on components
+initiating the local state when it's on
+
+46
+00:04:38,490 --> 00:04:43,320
+the server I will also make sure to
+initiate it on the browser so let me do
+
+47
+00:04:43,320 --> 00:04:50,289
+a quick reorganisation here I'll move
+this declaration outside I'll also move
+
+48
+00:04:50,289 --> 00:04:57,520
+State outside and in the else case I set
+initial data equals through window dot
+
+49
+00:04:57,520 --> 00:05:04,180
+dunder initial data I will also use this
+opportunity to delete window dot initial
+
+50
+00:05:04,180 --> 00:05:07,599
+data not only this we will allow the
+passage state should be garbage
+
+51
+00:05:07,599 --> 00:05:12,999
+collected but it also avoids conflicts
+with other components when we add grout
+
+52
+00:05:12,999 --> 00:05:17,860
+into this application
+let's test again create page game
+
+53
+00:05:17,860 --> 00:05:21,969
+pre-rendered from the server and on the
+browser react takes over and adds
+
+54
+00:05:21,969 --> 00:05:27,819
+interactivity before moving to our next
+topic let me make a small refactor here
+
+55
+00:05:27,819 --> 00:05:33,129
+right now I'm fetching the list of news
+before rendering the componentry string
+
+56
+00:05:33,129 --> 00:05:37,899
+well because I don't have any navigation
+in place the only thing I render are the
+
+57
+00:05:37,899 --> 00:05:43,209
+news but in a few moments I'm going to
+start working with routing and the user
+
+58
+00:05:43,209 --> 00:05:47,110
+will be able to render different
+components if the user is not going
+
+59
+00:05:47,110 --> 00:05:51,669
+through the news route I don't want to
+make him or her wait while I fetch the
+list of news also other components might
+
+60
+00:05:54,669 --> 00:06:00,009
+have other fetching needs to prepare for
+that scenario I refactor this code to
+
+61
+00:06:00,009 --> 00:06:06,189
+make it reusable well I prefer that each
+component exposed it's all data fetching
+
+62
+00:06:06,189 --> 00:06:11,680
+needs so let me do that with the news
+component I will press this fetch method
+
+63
+00:06:11,680 --> 00:06:17,439
+from here and in the news components I
+will declare I static methods requests
+
+64
+00:06:17,439 --> 00:06:21,729
+initial data
+let me paste the initial patch here
+static methods are used for placing
+
+65
+00:06:24,759 --> 00:06:30,830
+utilitarians for a given class that do
+not belong to their instances go back on
+the server component I can now call news
+
+66
+00:06:33,380 --> 00:06:39,080
+dot request initial data then get the
+initial data and render district it
+
+67
+00:06:39,080 --> 00:06:42,919
+looks like a small change but this will
+be flexible enough to handle initial
+
+68
+00:06:42,919 --> 00:06:47,650
+data factory requirements for any
+components when we have routing in place
+
+69
+00:06:47,650 --> 00:06:53,630
+so with this refactor in place let's
+begin working routes I'm going to use
+
+70
+00:06:53,630 --> 00:06:58,610
+the most popular routing solution for
+react react router currently in version
+
+71
+00:06:58,610 --> 00:07:06,949
+4 let me install it here and PM install
+react router dome right now I only have
+
+72
+00:07:06,949 --> 00:07:11,900
+a newest component here in the news
+folder I'll add a new home component I
+already have the files here so let me
+
+73
+00:07:14,000 --> 00:07:16,660
+just drag them
+
+74
+00:07:21,350 --> 00:07:26,330
+I will also create an app component
+which will be the new entry point for
+this application and contain the routing
+
+75
+00:07:28,460 --> 00:07:33,560
+code to decide whether to render home or
+news but before working on the app
+
+76
+00:07:33,560 --> 00:07:39,950
+component let me also define a routes
+configuration file react router has this
+
+77
+00:07:39,950 --> 00:07:44,600
+concept of dynamic routing which means
+that a config file is not always
+
+78
+00:07:44,600 --> 00:07:49,160
+necessary but because I'm doing
+server-side rendering I will need to
+
+79
+00:07:49,160 --> 00:07:54,410
+access the routes more than once in
+different places so it needs to exist as
+
+80
+00:07:54,410 --> 00:08:01,760
+a separate configuration file
+I will import home from home and our
+important news next my run configuration
+
+81
+00:08:06,950 --> 00:08:12,830
+is going to be a simple array so cost
+routes equals an array each raft will be
+
+82
+00:08:12,830 --> 00:08:19,160
+defined as an object for path slash the
+component is home I also need to say
+
+83
+00:08:19,160 --> 00:08:24,640
+exact true otherwise every path
+beginning with a slash would fall here I
+will add a new route path is slash news
+
+84
+00:08:28,700 --> 00:08:39,200
+and component is news let me export
+before perfect I have now both
+
+85
+00:08:39,200 --> 00:08:44,510
+components home and news and the routes
+configuration file let me work on the AB
+
+86
+00:08:44,510 --> 00:08:51,160
+components the new entry point of my
+application import react from react
+
+87
+00:08:51,160 --> 00:08:58,130
+import switch and route from react
+router done and of course the runs from
+
+88
+00:08:58,130 --> 00:09:06,110
+dot slash rods concept function returns
+a switch components the react router
+
+89
+00:09:06,110 --> 00:09:10,460
+switch make sure that only the first
+route that matches the current path is
+
+90
+00:09:10,460 --> 00:09:16,190
+used now what I'm going to do is
+generate an individual route tag for
+
+91
+00:09:16,190 --> 00:09:23,690
+each route in my config file so route
+snap route and index and I will return a
+
+92
+00:09:23,690 --> 00:09:29,990
+route with a key and copy all of the
+road properties you know the bath the
+
+93
+00:09:29,990 --> 00:09:38,210
+component etc and that's it for us Wow
+if you know react router you may have
+
+94
+00:09:38,210 --> 00:09:43,910
+realized that there's something missing
+here the router itself a component that
+should wrap all individual routes
+
+95
+00:09:45,920 --> 00:09:51,620
+something like this router but the thing
+is the react router library actually
+
+96
+00:09:51,620 --> 00:09:56,060
+provides different kinds of routers some
+of them work only in the browser and
+some in note instead on my browser
+
+97
+00:09:59,390 --> 00:10:07,670
+specific file I will import browser
+router from react router done ah let me
+
+98
+00:10:07,670 --> 00:10:12,350
+get rid of this new component here
+because well now I'm using app but most
+
+99
+00:10:12,350 --> 00:10:17,800
+importantly let me wrap it into browser
+router
+
+100
+00:10:18,230 --> 00:10:25,490
+on the server well let me first again
+import the app component here and change
+
+101
+00:10:25,490 --> 00:10:31,279
+news for my app components entry points
+good as I was saying on the server I
+
+102
+00:10:31,279 --> 00:10:35,420
+also need to wrap the app components
+into some router but instead of using
+
+103
+00:10:35,420 --> 00:10:41,899
+browser router I will use esthetic
+router import static router from react
+
+104
+00:10:41,899 --> 00:10:47,970
+router zone back down let me wrap it
+here
+
+105
+00:10:47,970 --> 00:10:53,769
+static router the aesthetic router
+doesn't try to get the URL automatically
+
+106
+00:10:53,769 --> 00:10:58,180
+as they browse the router this you have
+to provide it with which route it should
+
+107
+00:10:58,180 --> 00:11:02,440
+render in my case it's going to be
+whatever route the user requested which
+
+108
+00:11:02,440 --> 00:11:10,149
+Xpress gives me access in rack URL the
+static router also accepts a context
+
+109
+00:11:10,149 --> 00:11:15,070
+object this object will be passed as
+props to the render component and it can
+
+110
+00:11:15,070 --> 00:11:19,810
+be used to communicate with it for
+example I originally pass the initial
+data as props directly to the Neuse
+
+111
+00:11:21,910 --> 00:11:27,490
+components now I'm going to pass it
+through complex let me create a cost for
+
+112
+00:11:27,490 --> 00:11:33,970
+context Oh add an object with initial
+data and on the static router context
+
+113
+00:11:33,970 --> 00:11:40,450
+equals context now I need to update the
+news component since it expected to
+
+114
+00:11:40,450 --> 00:11:47,680
+receive initial data directly as props
+now it comes from props dot static
+context which is the prop that the
+
+115
+00:11:50,410 --> 00:11:56,500
+static router injects alright looking
+good there are still few things missing
+
+116
+00:11:56,500 --> 00:12:00,970
+but you can test what it got so far if I
+request the main route the server gives
+
+117
+00:12:00,970 --> 00:12:05,519
+me this home page if I check the source
+code I can see that it came
+
+118
+00:12:05,519 --> 00:12:12,699
+pre-populated I'll make a new fresh
+request to the news route good the
+
+119
+00:12:12,699 --> 00:12:16,660
+server sends a news page and if I check
+the source code you can see that it also
+
+120
+00:12:16,660 --> 00:12:22,269
+came pre-rendered from the server but we
+are not done yet there are a few rough
+
+121
+00:12:22,269 --> 00:12:27,860
+edges
+to begin with the server will always
+
+122
+00:12:27,860 --> 00:12:31,580
+fetch the news data even if the user
+navigates through other route that
+
+123
+00:12:31,580 --> 00:12:37,430
+doesn't need this data so let's fix this
+I will import match back from react
+router done this method allows me to
+
+124
+00:12:40,100 --> 00:12:45,440
+find which routes matches the current
+URL without rendering it let me also
+
+125
+00:12:45,440 --> 00:12:48,640
+import the routes file
+
+126
+00:12:49,960 --> 00:12:54,790
+our creative culture holds the cuit
+route it works like this I will call off
+my routes dot find and test each
+
+127
+00:12:58,000 --> 00:13:02,850
+individual routes with match path
+passing the curate URL and the route
+
+128
+00:13:02,850 --> 00:13:08,470
+next I'll call request initial data on
+whatever is the current routes component
+
+129
+00:13:08,470 --> 00:13:13,029
+now some components may declare I
+request initial data static methods but
+
+130
+00:13:13,029 --> 00:13:17,230
+others may not so to be safe let me
+check if the method exists before
+
+131
+00:13:17,230 --> 00:13:24,279
+calling it finally if there are calling
+news that requests initial data i'll
+
+132
+00:13:24,279 --> 00:13:29,920
+call request initial data on the current
+routes component now i need to get a
+
+133
+00:13:29,920 --> 00:13:33,910
+promise back from request initial data
+and some components might just return a
+
+134
+00:13:33,910 --> 00:13:38,500
+value or don't implement request initial
+data at all so i will wrap it into
+
+135
+00:13:38,500 --> 00:13:43,690
+promise dot result which will convert
+any return values into something i can
+
+136
+00:13:43,690 --> 00:13:51,820
+call button looking good i can now even
+delete the news component from here let
+
+137
+00:13:51,820 --> 00:13:56,470
+me see if these two works great if I
+request the main rods it still works
+
+138
+00:13:56,470 --> 00:14:02,440
+without fetching the news and if I
+request the news rod and again notice
+
+139
+00:14:02,440 --> 00:14:08,140
+that I'm making a fresh new request not
+clicking on the link cool it works and
+comes with data you might be asking
+
+140
+00:14:11,740 --> 00:14:16,510
+yourself why the hell and not click on
+the link to go to the news and instead
+
+141
+00:14:16,510 --> 00:14:21,730
+always making a new fresh request well
+that's the second rough edge we need to
+
+142
+00:14:21,730 --> 00:14:27,130
+smooth if I make a request directly to
+the news route the server will fetch the
+
+143
+00:14:27,130 --> 00:14:32,709
+data and send that pre-populated news
+page as expected but if I request any
+
+144
+00:14:32,709 --> 00:14:37,329
+other route and then click on the link
+to the news this won't make a request to
+
+145
+00:14:37,329 --> 00:14:42,279
+the server when we do we get to the news
+component using the link react on the
+
+146
+00:14:42,279 --> 00:14:46,570
+browser just switch the component and we
+read there's the dawn let me put it in
+
+147
+00:14:46,570 --> 00:14:51,250
+other way when every request is add from
+the server the component that appears
+
+148
+00:14:51,250 --> 00:14:56,709
+first comes pre-populated but any
+further navigations happens locally on
+
+149
+00:14:56,709 --> 00:15:01,480
+the browser if the user requests home
+and then navigate should use news will
+
+150
+00:15:01,480 --> 00:15:06,100
+not come pre populated it needs to
+Statutes data locally from the browser
+
+151
+00:15:06,100 --> 00:15:10,999
+well that's very easy to solve I'll open
+the noose component and do a regular
+
+152
+00:15:10,999 --> 00:15:16,189
+they attach or component dismount I
+already mentioned this component
+dismount is not caught on the server so
+
+153
+00:15:18,470 --> 00:15:22,879
+I can safely use it to do data faction
+on the browser when it doesn't complete
+
+154
+00:15:22,879 --> 00:15:29,029
+populated I'll do a regular fetch wait I
+can even use the static request initial
+
+155
+00:15:29,029 --> 00:15:36,509
+data that I already have in place news
+dot request initial data then
+
+156
+00:15:36,509 --> 00:15:43,240
+sub-state news I actually want to make
+this patch only if the component doesn't
+
+157
+00:15:43,240 --> 00:15:50,170
+have any news in its state and now if I
+click on the link the navigation happens
+
+158
+00:15:50,170 --> 00:15:56,019
+locally and the news component asks for
+the data it needs in the end what I did
+
+159
+00:15:56,019 --> 00:16:00,519
+here was making sure that the news
+component fetch it data only well needed
+
+160
+00:16:00,519 --> 00:16:05,379
+if the user visits my site it never
+opens the news page it will never fetch
+
+161
+00:16:05,379 --> 00:16:11,980
+it data and we are then we created a
+server rendered react application with
+
+162
+00:16:11,980 --> 00:16:17,889
+routing and data fetching using redux
+would be very similar just remember that
+
+163
+00:16:17,889 --> 00:16:23,019
+on the server every new request can come
+from the different clients so everything
+
+164
+00:16:23,019 --> 00:16:28,269
+should be stabilized in case of redux
+make sure for example to recreate the
+
+165
+00:16:28,269 --> 00:16:33,399
+store on every request in fact you can
+find a version of this code using a
+
+166
+00:16:33,399 --> 00:16:39,160
+Redux store on github alright
+but before wrapping up I have three very
+
+167
+00:16:39,160 --> 00:16:44,829
+quick tips on the first one calling json
+dot stringify here can make your
+
+168
+00:16:44,829 --> 00:16:49,439
+application vulnerable to cross-site
+scripting attacks and contain Jackson's
+
+169
+00:16:49,439 --> 00:16:57,930
+so this by installing a library such as
+serialized Java Script I will install it
+
+170
+00:16:59,770 --> 00:17:02,770
+import
+
+171
+00:17:06,760 --> 00:17:15,220
+and change json.stringify to serialize
+tip two I have search maps set up in my
+
+172
+00:17:15,220 --> 00:17:20,770
+web pack configuration file for both
+browser and server codes but note won't
+
+173
+00:17:20,770 --> 00:17:28,449
+load nor use search maps automatically
+so this by stalling search map support
+
+174
+00:17:28,449 --> 00:17:35,919
+I will import source map support from
+source map supports I also call search
+
+175
+00:17:35,919 --> 00:17:41,620
+map support dot install but only if this
+is running in development environment
+and for tip three bundling node projects
+
+176
+00:17:45,490 --> 00:17:49,659
+with web pack works really well but
+there are a few adjustment that you need
+
+177
+00:17:49,659 --> 00:17:52,210
+to do here and there to have the best
+results
+
+178
+00:17:52,210 --> 00:17:58,029
+like for example bundling only your own
+source files and not the files in node
+
+179
+00:17:58,029 --> 00:18:02,980
+modules well because not can do this by
+itself because it has its own native
+
+180
+00:18:02,980 --> 00:18:07,450
+module system and you will end up
+generating a much smaller bundle file
+
+181
+00:18:07,450 --> 00:18:13,000
+containing only your code let's do it
+quickly then and be install webpack node
+
+182
+00:18:13,000 --> 00:18:20,490
+externals also as development dependency
+on the web pack configuration file
+
+183
+00:18:20,490 --> 00:18:28,380
+require webpack note externals and in
+the server section add externals an
+
+184
+00:18:28,380 --> 00:18:36,690
+array of note externals you just watched
+an episode of react casts if you have
+
+185
+00:18:36,690 --> 00:18:40,830
+questions about the fonts and tools that
+i use head over to the frequently asked
+questions on github github.com slash
+
+186
+00:18:44,070 --> 00:18:48,840
+Cassio's and slash react guests where
+you can also get the source code and
+
+187
+00:18:48,840 --> 00:18:54,000
+suggest new episodes also special thanks
+for the full stack academy of code for
+
+188
+00:18:54,000 --> 00:18:59,340
+supporting this episode check them out
+at full-stack Academy com see you in the
+
+189
+00:18:59,340 --> 00:19:02,090
+next episode
+
+1
+00:00:00,030 --> 00:00:04,980
+ladies and gentlemen here's another
+episode of react Redux series and this
+
+2
+00:00:04,980 --> 00:00:10,200
+is the fifth one in the first four
+videos we learned about what what Redux
+
+3
+00:00:10,200 --> 00:00:14,549
+really is how it works independently how
+it works with react and the fourth one
+
+4
+00:00:14,549 --> 00:00:19,560
+was how to update a state immutably and
+now in this video we're gonna learn
+
+5
+00:00:19,560 --> 00:00:25,350
+about combining multiple reducers basic
+we're gonna learn how to split the
+
+6
+00:00:25,350 --> 00:00:32,099
+reducer into multiple reducer and then
+combine it can be tricky but with Texas
+nothing is tricky everything has to be
+
+7
+00:00:34,680 --> 00:00:37,980
+simple right if you're not following the
+entire series to do so I'll provide a
+
+8
+00:00:37,980 --> 00:00:42,300
+link here and I also have a full react
+series which you can also follow and
+
+9
+00:00:42,300 --> 00:00:46,219
+welcome to texted tutorials
+
+10
+00:00:47,899 --> 00:00:52,020
+alright just before we start when you do
+it really understand what are we trying
+
+11
+00:00:52,020 --> 00:00:56,010
+to do because those who are new to this
+they're really confuse why do we need to
+split the reducer into multiple reducers
+
+12
+00:00:58,620 --> 00:01:04,080
+and why do we need to combine them right
+when your project grows you divide your
+
+13
+00:01:04,080 --> 00:01:08,610
+team into multiple teams so whether they
+work on multiple modules of the same
+
+14
+00:01:08,610 --> 00:01:14,729
+project it's easier if the reducer are
+kind of split so they they have their
+
+15
+00:01:14,729 --> 00:01:21,240
+own reducer and it's easy to manage okay
+so how do you do it it completely up to
+
+16
+00:01:21,240 --> 00:01:27,000
+the project what kind of project you
+using but remember Redux god only allows
+
+17
+00:01:27,000 --> 00:01:32,250
+one producer it doesn't allow multiple
+user so in the story you only pass one
+
+18
+00:01:32,250 --> 00:01:37,680
+reducer so if you split it you have to
+combine it and then pass it to your
+
+19
+00:01:37,680 --> 00:01:42,780
+store now there are tricky things that
+could happen like when you originally
+
+20
+00:01:42,780 --> 00:01:50,159
+have access one action can access one
+property in the state now if you split
+
+21
+00:01:50,159 --> 00:01:55,380
+it now that action goes here in this
+reducer and then the property go in the
+other one then there is a way to
+
+22
+00:01:57,119 --> 00:02:00,450
+actually access it so we're gonna look
+at all of it and that's where the
+
+23
+00:02:00,450 --> 00:02:05,100
+complexity goes so so what I'm gonna do
+I'm gonna have two buttons and then
+to numbers okay and when I click on the
+
+24
+00:02:09,568 --> 00:02:14,489
+button up one of the buttons basically
+it would add the other numbers value
+
+25
+00:02:14,489 --> 00:02:19,260
+into this so if I won one it would
+become two one and if I click on here
+
+26
+00:02:19,260 --> 00:02:24,239
+you would basically add two plus one so
+become two three and so on and so forth
+
+27
+00:02:24,239 --> 00:02:27,420
+right and so fresh will have a one
+reducer with this state with two
+properties a and B for for each button
+
+28
+00:02:30,840 --> 00:02:36,209
+and then we'll split it and see how we
+can access it okay so what I'm gonna do
+
+29
+00:02:36,209 --> 00:02:42,120
+I'm gonna build two columns so I can
+have a class name equal to let's say
+
+30
+00:02:42,120 --> 00:02:48,090
+column we haven't really defined this
+class in the CSS will do in a minute but
+
+31
+00:02:48,090 --> 00:02:57,540
+inside will have a div and a button so
+they would hold a value so I can have a
+
+32
+00:02:57,540 --> 00:03:08,610
+span with a and let's assume that there
+is uh already a prop call a so I'm just
+
+33
+00:03:08,610 --> 00:03:15,660
+gonna say they start prop start a is the
+property inside a state okay alright and
+the button would say update a and I can
+
+34
+00:03:19,530 --> 00:03:25,859
+actually copy this create another button
+which would be B and it would have a B
+
+35
+00:03:25,859 --> 00:03:33,480
+stayed and it would say update B so in
+the app dot CSS I can define that column
+if I make a display
+
+36
+00:03:36,829 --> 00:03:45,180
+it's a inline block that would make two
+columns and I can just simply add some
+
+37
+00:03:45,180 --> 00:03:50,519
+margin let's say 40 pixels so we don't
+want to make it too fancy alright so I
+
+38
+00:03:50,519 --> 00:03:54,870
+have two buttons update and update beat
+right now it's not gonna update anything
+
+39
+00:03:54,870 --> 00:03:58,739
+because we haven't really set up
+anything right so next we will try to do
+
+40
+00:03:58,739 --> 00:04:03,239
+that alright so to build a road user
+we're gonna add the source folder I'm
+
+41
+00:04:03,239 --> 00:04:09,780
+gonna have a new folder called store and
+inside the store I can have a new file
+
+42
+00:04:09,780 --> 00:04:18,070
+called producer da yes
+that's inside inside the reducer I'm
+
+43
+00:04:18,070 --> 00:04:25,330
+going to have a nation-state state I'm
+gonna speak to cut some of the stuff and
+
+44
+00:04:25,330 --> 00:04:33,660
+it will have two properties a I'll just
+set it up to as a initial as a 1 and B
+
+45
+00:04:33,660 --> 00:04:41,520
+set it up as one as well
+reducer equal to it will have a state
+initial state and it would have actions
+
+46
+00:04:46,020 --> 00:04:52,720
+right and let us return state for now so
+we'll handle the functionality later and
+
+47
+00:04:52,720 --> 00:05:03,639
+we can export it export default user
+alright so we can use it somewhere now
+
+48
+00:05:03,639 --> 00:05:09,600
+inside the index rjs I'm gonna do
+whatever necessary to create the store
+
+49
+00:05:09,600 --> 00:05:13,990
+all right so what I've done in an index
+rjs then I've gotten the reducer
+
+50
+00:05:13,990 --> 00:05:16,300
+imported the reducer that we just
+created
+
+51
+00:05:16,300 --> 00:05:25,050
+imported crea create store from redox
+and provider component from react Redux
+
+52
+00:05:25,050 --> 00:05:32,160
+created the store with the reducer that
+we just imported and then wrap the app
+
+53
+00:05:32,160 --> 00:05:38,229
+component with the provided component
+and just pass a store there typical
+stuff that you need to do you know to
+
+54
+00:05:40,690 --> 00:05:47,050
+plug in your Redux okay now let's focus
+back on the app that is what we're gonna
+
+55
+00:05:47,050 --> 00:05:53,680
+build the what we gonna build map state
+do props and map dispatch the props so
+
+56
+00:05:53,680 --> 00:06:00,460
+let's do that
+Const map mat store two props we're
+
+57
+00:06:00,460 --> 00:06:08,710
+gonna get the store here it returns an
+object where are we just gonna map this
+
+58
+00:06:08,710 --> 00:06:17,380
+to property and be right so we can say a
+is nothing but store dot a and B is
+
+59
+00:06:17,380 --> 00:06:23,289
+nothing that store dot B so we have two
+properties
+
+60
+00:06:23,289 --> 00:06:31,300
+out and we can similarly do map this
+patch to props
+
+61
+00:06:31,300 --> 00:06:36,569
+now we haven't build actions yet so
+build it let's build it so in the button
+
+62
+00:06:36,569 --> 00:06:49,180
+one the update a we can say on click
+equal to they start props update a so
+
+63
+00:06:49,180 --> 00:06:57,099
+that will be our action and similarly
+for the be like in this copy and paste
+
+64
+00:06:57,099 --> 00:07:02,669
+here because it's gonna be similar and
+there should be a bake be and here I can
+
+65
+00:07:02,669 --> 00:07:14,229
+map these actions so I can say update a
+is and the type we can call it be let's
+
+66
+00:07:14,229 --> 00:07:22,330
+say update a and then for B we should
+have a similar so I'm just gonna copy
+
+67
+00:07:22,330 --> 00:07:32,379
+and paste and we're just gonna call it
+update B and now we can connect it so we
+
+68
+00:07:32,379 --> 00:07:48,969
+need to import obviously connect from
+yeah redux that we can use it here so we
+
+69
+00:07:48,969 --> 00:07:54,959
+can say connect again all of this stuff
+I covered in a previous tutorial so if
+
+70
+00:07:54,959 --> 00:08:04,119
+you haven't gone through this you can do
+so so here I can say map store two
+
+71
+00:08:04,119 --> 00:08:12,819
+prompts and I can pass map
+it's faster props so now one thing I
+
+72
+00:08:12,819 --> 00:08:18,309
+forgot was here for the map this past
+two and we need to pass a dispatch so
+
+73
+00:08:18,309 --> 00:08:26,499
+it's available and now if I look at it
+it's works but still I don't have this
+
+74
+00:08:26,499 --> 00:08:31,360
+because I really haven't defined the
+actions yet inside the reducer so next
+
+75
+00:08:31,360 --> 00:08:35,539
+we want to do so in the reducer we can
+have two events so if the
+
+76
+00:08:35,539 --> 00:08:46,639
+the action dot type I'd say it's equal
+to update a then what we want to do we
+
+77
+00:08:46,639 --> 00:08:54,019
+want to simply return plus we want to
+copy create a copy of the state the
+
+78
+00:08:54,019 --> 00:09:01,639
+current state and then we can't if it's
+a then we need to update a write with
+
+79
+00:09:01,639 --> 00:09:16,550
+the current a plus current B and
+similarly for B we want to do the same
+
+80
+00:09:16,550 --> 00:09:30,440
+thing here we wanna update B all right
+so that should work so now if I click on
+
+81
+00:09:30,440 --> 00:09:37,190
+update a it adds one plus one it makes
+it two again if I do this it should add
+
+82
+00:09:37,190 --> 00:09:43,040
+two plus one and makes it three if I do
+this it should do three plus one makes
+it four and if I do again it should make
+
+83
+00:09:46,490 --> 00:09:51,519
+it SEP all right so it works now now
+it's time to actually split our reducer
+
+84
+00:09:51,519 --> 00:09:58,010
+into multiple reducers so how do we do
+that so it's pretty simple all we need
+
+85
+00:09:58,010 --> 00:10:09,110
+to do is let's create two separate files
+so we're gonna say reducer ajs and the
+
+86
+00:10:09,110 --> 00:10:16,970
+second file is going to be reducer bjs
+okay what I'm gonna do is copy the
+
+87
+00:10:16,970 --> 00:10:25,069
+entire thing into a and B okay and
+inside a we are only going to keep the
+functionality related to a even state so
+
+88
+00:10:28,550 --> 00:10:34,130
+here I don't need to be here so this is
+only gonna have a then I have initial
+
+89
+00:10:34,130 --> 00:10:42,850
+state which is a and then action type
+update a and no B
+
+90
+00:10:43,620 --> 00:10:52,990
+similarly for B we are going to remove a
+from the state and action type a as well
+
+91
+00:10:52,990 --> 00:11:00,490
+from here alright so now that we have
+split the reducer into two we need to
+
+92
+00:11:00,490 --> 00:11:06,190
+plug that in into index of j s where we
+initially were plugging reducer here
+
+93
+00:11:06,190 --> 00:11:13,150
+right so I can actually comment this out
+for now import those two reducer so I
+could say import reducer a from let's
+
+94
+00:11:20,710 --> 00:11:42,040
+say a store slash reducer a import
+reducer B from this would be from store
+/ producer B okay so now we have two
+
+95
+00:11:47,290 --> 00:11:55,270
+teasers so how do we really combine it
+so to combine it we need to have a
+
+96
+00:11:55,270 --> 00:12:00,490
+special functionality from it's a
+deduction for clarity so it should be
+
+97
+00:12:00,490 --> 00:12:05,730
+inside the Redux so it's called combined
+reducers so we need to get that and
+
+98
+00:12:05,730 --> 00:12:11,830
+before I even pass it to the store we
+need to create a route reducer so we can
+
+99
+00:12:11,830 --> 00:12:21,370
+say Const route reducer equal to we can
+use a combined reducer and instead of
+
+100
+00:12:21,370 --> 00:12:26,980
+just passing as an argument we need to
+provide kind of a namespace here so I'm
+
+101
+00:12:26,980 --> 00:12:41,440
+gonna say are a for the reducer a and
+our B for the reducer B all right so now
+
+102
+00:12:41,440 --> 00:12:47,740
+we have one reducer and we can pass this
+to do producer into the store all right
+
+103
+00:12:47,740 --> 00:12:54,900
+so now inside a purchase initially we
+used to have you know stored stored a
+
+104
+00:12:54,900 --> 00:13:00,070
+instead we
+have to use that namespace so we have
+
+105
+00:13:00,070 --> 00:13:09,910
+our a dot a and we you will have for B
+we'll have our B dot B so that is fixed
+but if you look at the agent reducer
+
+106
+00:13:12,130 --> 00:13:18,280
+there is a one issue so before remember
+when I click on the update a button he
+
+107
+00:13:18,280 --> 00:13:26,730
+was updating and adding state a into B
+right now B is no longer available so
+
+108
+00:13:26,730 --> 00:13:33,280
+this not going to work because there is
+no state B so how do we really access B
+
+109
+00:13:33,280 --> 00:13:38,020
+now that we have split the reducer so
+for that we need to actually pass it as
+
+110
+00:13:38,020 --> 00:13:46,870
+a payload into this reducer so how do we
+do that so fine if I go back in a the
+
+111
+00:13:46,870 --> 00:13:52,630
+only place the state is available fully
+is all the way here what I do the on a
+
+112
+00:13:52,630 --> 00:14:00,510
+click so I have the entire proper level
+and so when I click on a instead of just
+
+113
+00:14:00,510 --> 00:14:06,910
+clicking I need to pass something here
+so let's convert this into a function so
+
+114
+00:14:06,910 --> 00:14:17,770
+I can pass it an argument so now I can
+pass what this this is a so I need to
+
+115
+00:14:17,770 --> 00:14:23,590
+pass B right so I can say this dot
+prompts dot B right so if I look at here
+
+116
+00:14:23,590 --> 00:14:29,740
+I have this prop B which is nothing but
+store dot RB dot b okay and as you can
+
+117
+00:14:29,740 --> 00:14:36,970
+see I need to also do the same thing
+here right but here instead of B we
+
+118
+00:14:36,970 --> 00:14:46,690
+would need a right so here I can say
+this dot props dot a and now that our
+
+119
+00:14:46,690 --> 00:14:53,020
+event takes an argument we have to pass
+it here as well
+so for a we are passing B so let us call
+
+120
+00:14:57,290 --> 00:15:05,450
+it a B and here we're gonna call it also
+B and we'll get past be here and for for
+
+121
+00:15:05,450 --> 00:15:17,030
+this we can pass a in nutshell since we
+cannot access a from b and b from a we
+need to actually get it from the all the
+
+122
+00:15:19,160 --> 00:15:23,540
+way top level where when we click on the
+event that time it will it will pass
+
+123
+00:15:23,540 --> 00:15:32,210
+that prop as a payload and when it comes
+to the reducer it will come in an action
+
+124
+00:15:32,210 --> 00:15:39,290
+right so instead of for for a instead of
+state dot b we have to say action dot B
+and similarly in the abuse of B we are
+
+125
+00:15:44,540 --> 00:15:50,840
+passing a right so instead of stayed on
+a we are saying action dot a since it's
+
+126
+00:15:50,840 --> 00:15:58,520
+coming as a pelo right and now if I go
+back here and I run it it works as a
+
+127
+00:15:58,520 --> 00:16:04,640
+charm as used to but this time all the
+reducers are we have two reducers and
+
+128
+00:16:04,640 --> 00:16:09,530
+certainly okay so that's it folks so for
+the next video let's just keep it a
+
+129
+00:16:09,530 --> 00:16:14,300
+surprise so I'm just gonna continue more
+react redux video
+
+130
+00:16:14,300 --> 00:16:20,150
+and so if you want to follow it I'll
+provide a link here to the playlist and
+
+131
+00:16:20,150 --> 00:16:23,210
+I hope you learned something new from
+this tutorial if you did please like
+
+132
+00:16:23,210 --> 00:16:28,820
+subscribe and provide a constructive
+comment don't forget to Like and you can
+
+133
+00:16:28,820 --> 00:16:33,320
+support the channel multiple ways you
+can support via patreon I'll provide a
+
+134
+00:16:33,320 --> 00:16:40,070
+link here you can also support it by
+providing translation you know provide a
+
+135
+00:16:40,070 --> 00:16:46,460
+CC on this video the detail is in
+description and you can also buy
+
+136
+00:16:46,460 --> 00:16:52,420
+merchandise from teespring I'll provide
+a link here and thank you
+
+1
+00:00:00,030 --> 00:00:04,940
+hey guys so in this episode of react
+Redux series so we're gonna look at
+
+2
+00:00:04,940 --> 00:00:12,090
+Redux middleware I'm sure you have heard
+of middle verse like reading saga redux
+
+3
+00:00:12,090 --> 00:00:16,590
+thunk and few other ones that are
+available in the market but today we're
+
+4
+00:00:16,590 --> 00:00:22,109
+gonna look at a simple example of Redux
+a middleware that we're gonna create and
+
+5
+00:00:22,109 --> 00:00:27,900
+we're gonna look at how it works and
+where to use it I think it's important
+to actually understand how it works
+
+6
+00:00:29,970 --> 00:00:34,860
+before actually use and by the way this
+is and this this video is part of a much
+
+7
+00:00:34,860 --> 00:00:39,750
+larger series on react and redux and if
+you're not following it I would highly
+
+8
+00:00:39,750 --> 00:00:46,399
+suggest you do so I'll provide a link
+here and welcome to tech see tutorials
+
+9
+00:00:48,590 --> 00:00:53,699
+alright so before we start let's try to
+understand what the redux middleware
+really is and what problem it solves for
+
+10
+00:00:55,800 --> 00:01:00,600
+us let's look at this diagram we looked
+at this in a previous tutorial where we
+
+11
+00:01:00,600 --> 00:01:08,430
+understood how actually actions reducer
+works so here in this chart we have some
+
+12
+00:01:08,430 --> 00:01:14,369
+action called age and from UI when you
+dispatch this action basically when you
+
+13
+00:01:14,369 --> 00:01:18,689
+click on a button called AJ it
+dispatches this action and in the
+
+14
+00:01:18,689 --> 00:01:24,420
+reducer we catch this by action type and
+then do something basically update the
+
+15
+00:01:24,420 --> 00:01:31,920
+state based on this action name right
+and that's all it is but what if what
+
+16
+00:01:31,920 --> 00:01:35,159
+happens when we have something
+asynchronous so what is asynchronous
+
+17
+00:01:35,159 --> 00:01:41,340
+really means here let's say if when I
+click on this H button I want to save
+
+18
+00:01:41,340 --> 00:01:46,590
+this age on on to the server once I have
+confirmation that it has been saved on
+
+19
+00:01:46,590 --> 00:01:51,299
+the server then I want to update my
+state because that only makes sense when
+
+20
+00:01:51,299 --> 00:01:55,170
+you to update it when it saves on the
+server let's say if there's an error you
+
+21
+00:01:55,170 --> 00:02:01,200
+want to basically exit out and cancel
+the action ok so in the current
+
+22
+00:02:01,200 --> 00:02:07,580
+situation in a simple current situation
+you cannot do this because if you try to
+
+23
+00:02:07,580 --> 00:02:12,020
+run anything asynchronous in the reducer
+it won't work we
+
+24
+00:02:12,020 --> 00:02:17,270
+it's designed to run synchronous code
+and so we have a problem
+
+25
+00:02:17,270 --> 00:02:22,540
+so we need something where we can
+actually catch the action in the middle
+do our operation of saving or whatever
+
+26
+00:02:25,490 --> 00:02:30,890
+we want to do and then once it's done
+then we want to continue with that
+action to the reducer to update the
+
+27
+00:02:33,620 --> 00:02:39,050
+state so I'm going to use the example
+that we use in a previous tutorial now
+
+28
+00:02:39,050 --> 00:02:44,120
+where we used react with Redux
+and you can actually clone this a
+
+29
+00:02:44,120 --> 00:02:48,590
+provider link also in the description so
+you can do that and so basically you can
+
+30
+00:02:48,590 --> 00:02:54,080
+run a git clone and get this repo on
+your computer and now I've already done
+
+31
+00:02:54,080 --> 00:03:00,170
+that and if we look at look through the
+code is pretty simple when I execute it
+I get this two button age up and H down
+
+32
+00:03:04,070 --> 00:03:08,920
+when I click on a job it increases the
+age here when I click on age down it
+
+33
+00:03:08,920 --> 00:03:13,520
+decreases and it's very simple so let's
+look at the code
+
+34
+00:03:13,520 --> 00:03:20,090
+so the code in the ABS yes I have two
+buttons the label and then two buttons
+
+35
+00:03:20,090 --> 00:03:28,450
+here and when I click on this on click
+button it has this action called on H up
+
+36
+00:03:28,450 --> 00:03:34,880
+which is defined here in map dispatch to
+props it's pretty simple if you don't
+
+37
+00:03:34,880 --> 00:03:39,320
+know all of these I would highly suggest
+to look at the previous tutorial in this
+
+38
+00:03:39,320 --> 00:03:45,160
+series so that you get familiar arise
+with it before coming here and then
+
+39
+00:03:45,160 --> 00:03:51,890
+similarly if you click on a on H town a
+dispatches this action age of an H down
+
+40
+00:03:51,890 --> 00:03:58,940
+and here inside the store folder I have
+a reducer file which simply takes that
+
+41
+00:03:58,940 --> 00:04:05,450
+action and based on the action it
+updates the value of the state and the
+
+42
+00:04:05,450 --> 00:04:11,720
+state is nothing but simple property
+college ok so it's pretty simple now
+
+43
+00:04:11,720 --> 00:04:17,570
+let's build our a middleware here
+alright so to add the middle where we
+
+44
+00:04:17,570 --> 00:04:22,710
+need to go to the index dot J's follow
+where we actually create our store
+
+45
+00:04:22,710 --> 00:04:27,930
+and where you can see that we are
+importing create create store and with
+
+46
+00:04:27,930 --> 00:04:35,430
+that we need to import something else
+there is a property call apply middle
+
+47
+00:04:35,430 --> 00:04:43,979
+where we're gonna import it from redux
+and instead of passing only reducer in a
+
+48
+00:04:43,979 --> 00:04:50,729
+create store argument we can also pass
+apply middleware also and then it's a
+
+49
+00:04:50,729 --> 00:04:56,009
+function so we have to execute here and
+argument to this function would be our
+
+50
+00:04:56,009 --> 00:05:00,120
+middleware that we're gonna create so
+let's look at what we want to create so
+
+51
+00:05:00,120 --> 00:05:06,660
+we're gonna click on H up or H down I
+want to capture the action in the middle
+
+52
+00:05:06,660 --> 00:05:13,139
+and then just log the action we're not
+gonna do anything fancy here but but we
+
+53
+00:05:13,139 --> 00:05:16,860
+will get the idea of how it works and
+then in the next tutorial we're going to
+
+54
+00:05:16,860 --> 00:05:22,650
+look at redux thunk where we can do
+something asynchronous alright so let's
+build our middle right here I'm going to
+
+55
+00:05:26,370 --> 00:05:38,419
+call it log action and it has one
+argument which is nothing but store
+
+56
+00:05:38,419 --> 00:05:44,969
+alright so I'm going to pass this long
+action in to apply middleware alright so
+
+57
+00:05:44,969 --> 00:05:49,340
+that's how it's going to work but right
+now there is nothing going on here so
+
+58
+00:05:49,340 --> 00:05:57,810
+what we're gonna do is when when the
+when the action is dispatched this will
+
+59
+00:05:57,810 --> 00:06:05,039
+run and it will first capture the action
+it's all done using this apply
+
+60
+00:06:05,039 --> 00:06:06,900
+middleware so we don't have to worry
+about it
+
+61
+00:06:06,900 --> 00:06:12,389
+we just need to worry about what we do
+when we catch the the action okay so
+
+62
+00:06:12,389 --> 00:06:17,699
+when we catch the action we can take in
+and do something next so we need to
+
+63
+00:06:17,699 --> 00:06:27,330
+return this function which has argument
+called next and now now that we capture
+it now we need to return the action back
+
+64
+00:06:29,610 --> 00:06:36,300
+we do something with it and return the
+action something
+
+65
+00:06:36,300 --> 00:06:42,599
+where the argument is action right and
+what what do we do with it
+
+66
+00:06:42,599 --> 00:06:50,310
+so right now we just simply look at what
+that action is so to get the the the
+
+67
+00:06:50,310 --> 00:06:56,099
+content of the action I would just say
+Const next and I would pass the action
+
+68
+00:06:56,099 --> 00:07:05,340
+here and this would let's say I'm gonna
+call it result equal to next action and
+
+69
+00:07:05,340 --> 00:07:09,930
+this is now we have the action now we
+can do something with it and return it
+
+70
+00:07:09,930 --> 00:07:19,039
+let's first look at it what it is so I'm
+just say console dot log caught in the
+
+71
+00:07:19,039 --> 00:07:33,270
+middle where and we can use the template
+string to print out the result and then
+
+72
+00:07:33,270 --> 00:07:38,099
+we'll just let the action back on his
+track to the reducer so what we'll say
+
+73
+00:07:38,099 --> 00:07:47,580
+return result all right all right so
+when I execute this code now let's let
+
+74
+00:07:47,580 --> 00:07:55,380
+me open the the consult so we can see
+what's going on all right so as soon as
+
+75
+00:07:55,380 --> 00:08:01,020
+I click on age up it says caught in the
+middle where and it's giving me object
+
+76
+00:08:01,020 --> 00:08:09,750
+object and that is because we need to
+actually this is an object so we need to
+
+77
+00:08:09,750 --> 00:08:19,050
+turn into string so I'm just gonna say
+Jason dot stringify and this way I can
+
+78
+00:08:19,050 --> 00:08:27,029
+convert that object into a string so we
+can see it all right now click on here
+
+79
+00:08:27,029 --> 00:08:37,829
+it says caught in the middle where AJ
+value is 1 and we can see there that the
+
+80
+00:08:37,828 --> 00:08:43,889
+value in action right now that we know
+how middleware works let's use one of
+
+81
+00:08:43,890 --> 00:08:50,040
+those famous middleware redox tank to
+actually
+
+82
+00:08:50,040 --> 00:08:53,310
+do something asynchronous and cache the
+action in the middle and do something
+
+83
+00:08:53,310 --> 00:08:57,120
+with it and again if you're not
+following this whole series I will
+
+84
+00:08:57,120 --> 00:09:02,220
+provide a link here so you can follow it
+I have lots of other react tutorials as
+
+85
+00:09:02,220 --> 00:09:04,410
+well that you can watch it from the
+beginning
+and I hope you learned something from
+
+86
+00:09:05,910 --> 00:09:11,779
+this tutorial and if you did please like
+don't forget to Like comment and
+
+87
+00:09:11,779 --> 00:09:16,470
+subscribe and you can help the channel
+we have patreon I'll provide a link here
+
+88
+00:09:16,470 --> 00:09:21,899
+and you can also help the channel via by
+translating the with this video from me
+
+89
+00:09:21,899 --> 00:09:26,730
+into your native language it's very
+simple and the direction would be in the
+
+90
+00:09:26,730 --> 00:09:30,199
+description as well thank you
