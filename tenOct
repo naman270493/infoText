@@ -313,6 +313,13 @@ class Results extends React.Component {
     }
 }
 
+Results.propTypes = {
+    location: React.PropTypes.object.isRequired,
+    results: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
+};
+
+export default Results;
 //CategoryMiddleView
 
    render() {
