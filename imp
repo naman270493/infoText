@@ -1,0 +1,193 @@
+
+flux vs redux
+
+Redux keeps the action creator from Flux. Whenever you want to change the state of the application, you shoot off an action. That’s the only way that the state should be changed.
+In Flux, you can have multiple stores.In Redux, there is only one store
+one of the key ideas of Redux. The state object isn’t manipulated directly. Instead, each slice is copied and then all of the slices are combined into a new state object.
+
+In Redux, there’s a similar concept: smart and dumb components. 
+
+data flow
+  The view requests an action. The action creator formats it and returns it.
+  the view dispatches the action.
+  The store receives the action. It sends the current state tree and the action to the root reducer.
+  The root reducer cuts apart the state tree into slices. Then it passes each slice to the subreducer that knows how to deal with it.
+  The subreducer copies the slice and makes changes to the copy. It returns the copy of the slice to the root reducer.
+  Once all of the subreducers have returned their slice copies, the root reducer pastes all of them together to form the whole updated state tree, which it returns to the store. The store replaces the old state tree with the new one.
+  The store tells the view layer binding that there’s new state.
+  The view layer binding triggers a rerender.
+  
+  
+Symbol 
+how lazy loading implemented in angular js
+directive function
+components in angular 
+iterator 
+generator
+lexical scoping - 
+svg vs canvas
+web worker use in application
+make a 16 col grid in bootstrap -  easiest way is probably to use the Customizable download that Twitter Bootstrap provides
+need to modify grid.less file and change the @grid-columns : 16 in the variables.less files
+
+flexbox - The main idea behind the flex layout is to give the container the ability to alter its items' width/height (and order) to best fill the available space (mostly to accommodate to all kind of display devices and screen sizes). A flex container expands items to fill available free space, or shrinks them to prevent overflow.
+display: flex; //defines a flex container; inline or block 
+flex-direction: row | row-reverse | column | column-reverse; //defining the direction flex items are placed in the flex container. Flexbox is a single-direction layout concept
+flex-wrap: nowrap | wrap | wrap-reverse;//flex items will all try to fit onto one line. You can change that and allow the items to wrap as needed
+justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly; //helps distribute extra free space left over when either all the flex items on a line 
+align-content
+align-items
+order: <integer>;
+flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] //
+flex-grow: <number>;
+flex-shrink
+align-self
+ 
+Symbols used to make object properties that are anonymous. This data type is used as the key for an object property when the property is intended to be private, for the internal use of a class or an object type.
+When a symbol value is used as the identifier in a property assignment, the property (like the symbol) is anonymous; and also is non-enumerable. Because the property is non-enumerable, it will not show up as a member in the loop construct "for( ... in ...)", and because the property is anonymous, it will not show up in the result array of "Object.getOwnPropertyNames()
+we can use it for object keys, its kind of hidden so if we object.keys it will not be printed
+purpose of symbol is to generate a unique id which is inaccessible to us
+ Symbol values provide a way by which custom classes can create private members, and maintain a symbol registry that pertains just to that class
+var sym = Symbol();
+console.log(typeof sym);
+
+console.log(Symbol("foo") === Symbol("foo"));
+//false - while foo is just the description its not same, symbol is unique
+
+console.log(Number(3) === Number(3));
+//true - it is numebr type 3
+
+we can also pass a symbol dscription in parenthesis to symbol, on 
+console.log(sym.toString()); 
+
+if we want to use same symbol we have to use 
+let s = Symbol.for("Regsym"); //if regsym doesnt exist it will create one
+let s1 = Symbol.for("Regsym");
+
+console.log(s===s1);
+
+use in object properties
+
+let fname = Symbol();
+let person = {[fname]:"abc"}
+console.log(Object.getOwnPropertyNames(person));
+//[]
+console.log(Object.getOwnPropertySymbols(person));
+//[Symbol()]
+Object.keys(person1);
+//[]
+let person1 = {[fname]:"abc", lname:"ag"};
+Object.keys(person1);
+//["lname"]
+
+Lazy loading - Lazy loading is a concept where we delay the loading of the object until the point where we need it. 
+when application is large the n eventually start up time takes a load time taking ui issue. so we want to split application so everything is not loaded at the starting time, 
+we config the router to implement routing .our application is made up of 3 routes, home, about, and settings. Home loads on the default route when the application loads. About and settings routes are lazy loaded. 
+
+component in angular - Component is a special kind of directive that uses a simpler configuration which is suitable for a component-based application structure.
+writing component directives will make it easier to upgrade to Angular
+
+web worker - 
+Data is sent between workers and the main thread via a system of messages — both sides send their messages using the postMessage() method, and respond to messages via the onmessage event handler 
+Creating a new worker is simple. All you need to do is call the Worker() constructor
+
+var myWorker = new Worker('worker.js');
+
+Sending messages to and from a dedicated worker
+<p>Count numbers: <span id="result"></span></p>
+ myWorker.onmessage = function(event) {
+            document.getElementById("result").innerHTML = event.data;
+        };
+		
+If you need to immediately terminate a running worker from the main thread, you can do so by calling the worker's terminate
+myWorker.terminate();
+
+In the worker thread, workers may close themselves by calling their own close() method
+
+
+iterable is an object that implements a method with key Symbol.iterator and this method returns symbol.iterator
+Iteartor is an object that implements a next method, which knows how to access elemnet in collection and returns a object containing value(any datatype) & boolean flag done (indicates iteration is compete or not)
+
+Iterable{
+[symbol.iterator](): Iterator
+}
+
+Iterator{
+	next(): obj;
+}
+
+obj{
+	 value: any
+	 done: boolean flag
+}
+
+
+let iterable=[1,2];
+
+function createIterator(arr){
+	let count =0;
+	next : function(){
+			return count<array.length ? {value:array[count++], done: false} :{ value: undefined, done: true} ;
+	}
+}
+
+let it = createIterator(iterable);
+console.log(it.next()); // object {value :1 done:false}
+console.log(it.next()); // object {value :2 done:false}
+console.log(it.next());  // object {value :undefined done:true} 
+
+built in symbol - symbol.iterator
+
+for..of - cannt be used with all type of object
+how do we know if object has iterator method - by checking object has method defined for key symbol.iterator
+
+let str = "hello";
+let num= 4;
+let obj = {name:"ab"};
+let arr=[1,2,3];
+
+str[Symbol.iterator] //function()
+num[Symbol.iterator] //undefined
+obj[Symbol.iterator] //undefined
+arr[Symbol.iterator] //function()
+ 
+si we cannt run for of loop in object
+if we do it will give typeerror: obj[Symbol.iterator] is not a function
+
+To use it within object we need to define our own method with symbol.iterator
+
+ person[Symbol.iterator] = function(){
+let properties = Object.keys(person);
+let count = 0;
+let isDone = false;
+let next = () => {
+    if(count>=properties.length){
+        isDone = true;
+    }
+    return{done: isDone, value: this[properties[count++]]};
+}
+return {next};
+    
+};
+
+Generators - 
+this pausing & resuming is possible in the generators with yield keyword
+yield can be thought of as a generator-based version of the return keyword.
+yield return  a iterableObject containing value(any datatype) & boolean flag done (indicates iteration is compete or not)
+generator has same syntax as function but it has * with it
+The generator's code execution remains paused until the generator's next() method is called. Each time the generator's next() method is called, the generator resumes execution and runs. It runs till The end of the generator function is reached; in this case, execution of the generator ends and an IteratorResult is returned to the caller in which the value is undefined and done is true.
+ 
+function* createGen(){
+	yield 1;
+	console.log("after");
+	yield 2;
+}
+
+let gen = createGen(); //just create refrence does not start executing
+
+to execute we call .next method on generator
+
+gen.next(); // Object{value:1, done: false}
+gen.next(); // After Object{value:2, done: false}
+gen.next(); // Object{value:undefined, done: true}
+
