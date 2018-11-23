@@ -191,3 +191,55 @@ gen.next(); // Object{value:1, done: false}
 gen.next(); // After Object{value:2, done: false}
 gen.next(); // Object{value:undefined, done: true}
 
+
+
+<body ng-app="Demo">
+<div>
+	<span
+            ng-repeat="word in [ 'Word', 'to', 'your', 'mother' ]"
+            bn-highlight
+            bn-emergency>
+
+            {{ word }}
+
+        </span>
+ </div>
+</body>
+</html>
+
+
+ <script>
+     var app = angular.module( "Demo", [] );
+     var app = angular.module( "Demo", [] );
+     app.directive(
+            "bnHighlight",
+            function() {
+            return({
+                    compile: function compile( tElement, tAttributes ) {
+                    console.log( "Adding .highlight class." );
+                    tElement.addClass( "highlight" );
+                },
+                    restrict: "A"
+                }); 
+                }
+        );
+       
+        app.directive(
+            "bnEmergency",
+            function() {
+              
+                return({
+                    link: link,
+                    restrict: "A"
+                });
+   
+                function link( scope, element, attributes ) {
+                    console.log( "Adding .emergency class." );
+                    element.addClass( "emergency" );
+                }
+            }
+        );
+ </script>
+ 
+ Adding .highlight class.
+4 Adding .emergency class.
