@@ -1,0 +1,215 @@
+Set object lets you store unique values of any type, whether primitive values or object references
+
+let arr = [11,22,33,65,33];
+let mset = new Set(arr);
+
+mset.add(100);
+mset.add({a:1,b:2});
+mset.delete(100);
+
+we can also run forEach loop 
+
+map store key value pairs and remembers the original insertion order
+let map = new Map(['a','Hello'],['b', 'bye']);
+map.set('c', 'hi');
+map.delete('a1');
+console.log(map.size);
+
+weakset and weakmap deals in objects 
+
+let weakset = new Weakset();
+let car1 = {make: "Honda", model : 'civic'};
+
+weakset.add(car1);
+lwt key1 = {id:1}
+let weakmap = new WeakMap();
+weakmap.set(key1, car1);
+
+state and props data pass - 
+shouldcomponentupdate
+purecomponent
+
+Parent ---> child
+
+parent comp
+
+class App extends React.Component {
+	 render() {
+        return (    <div className="container">
+					<Home name={"Max"} age={27}/>
+				</div>
+        );
+    }
+}
+
+{"Max"} - props
+
+child comp
+
+class Home extends React.Component {
+    render() {
+        
+		console.log(this.props); 
+		// I can acess props in render method, even though i havent created this property this.props. well we are extending react.commponent and it has props property, so we can access props here
+		
+        return (
+            <div>
+                <h3>Hello {this.props.name}!</h3>
+                <p>You're almost {age}</p>
+            </div>
+        );
+    }
+}
+
+child to Parent -
+
+class App extends React.Component {
+
+	onGreet(){
+			alert("Hello");
+	}
+	 render() {
+        return (    <div className="container">
+					<Home name={"Max"} age={27} greet = {this.onGreet}/> //we have not bind it to this because we have not used this.onGreet in declaration
+				</div>
+        );
+    }
+}
+
+
+
+class Home extends React.Component {
+    render() {
+return (
+            <div>
+		<button onClick={this.props.greet} className="btn btn-primary">Greet</button> 
+			</div>
+);
+    }
+
+child to parent when we want to pass data on ui action using state 
+
+class App extends React.Component {
+	constructor(){
+		super(props);
+		this.state = {homeLink :"Home"}; //initialize the state
+	}
+	 onChangeLinkName(newName) {
+        this.setState({
+            homeLink: newName
+        });
+    }
+	 render() {
+        return (    <div className="container">
+		<Home name={"Max"} age={27} changeLink={this.onChangeLinkName.bind(this)} initialLinkName={this.state.homeLink}/> // as we have this keyword in onChange so we need to bind the data 
+					</div>
+        );
+    }
+}
+
+class Home extends React.Component {
+	constructor(){
+		super(props);
+		this.state = {
+            
+            homeLink: props.initialLinkName
+        }; //initialize the state
+	}
+	
+	 onChangeLink() {
+        this.props.changeLink(this.state.homeLink);
+    }
+
+    onHandleChange(event) {
+        this.setState({
+            homeLink: event.target.value
+        });
+    }
+
+	
+
+    render() {
+	return (
+            <div>
+	
+		<input type="text" value={this.state.homeLink} onChange={(event) => this.onHandleChange(event)} />
+       <button onClick={this.onChangeLink.bind(this)} className="btn btn-primary">Change Header Link</button>
+			</div>
+	);
+    }
+	
+Parent to Grandchild
+
+class App extends React.Component {
+	 render() {
+        return (    <div className="container">
+					<Child name={"Max"} age={27}/>
+				</div>
+        );
+    }
+}
+
+class Child extends React.Component {
+	 render() {
+        return (    <div className="container">
+					<Grandchild {...props}/>
+				</div>
+        );
+    }
+}
+
+class Grandchild extends React.Component {
+    render() {
+           return (
+            <div>
+                <h3>Hello {this.props.name}!</h3>
+                <p>You're almost {age}</p>
+            </div>
+        );
+    }
+}
+
+HOC - they are functions that wrap around the component tht give them extra features and functionalities.
+that is they accept component as parameter and return augmented version of component 
+we can change props, also we can render something else instead of rendering original component
+
+LoaderHOC
+
+const LoaderHOC = (WrappedComponent) =>{
+	return class LoaderHOC extends Component{
+		 render(){
+		   this.props.contacts.length ==0?  <div className= 'Loader'> : <WrappedComponent{...this.props}>
+		 }
+	}
+}
+
+In the contactApp or wherever we want to reuse the logic, we can export that wrapping it inside on every page
+
+export default LoaderHOC(ContactApp);
+
+
+
+STATELESS COMPONENT declared as a function that has no state
+These components must not retain internal state and do not have the component lifecycle methods. 
+
+Pure component - when we do setstate then re-rendering happens, and sometimes these updates are not needed
+
+like if we have to display the score of a match, but in football if score changes rarely so we get the same score but setstate would re render the component
+so like if there is a setInterval in setstate then it will rerender the dom even though value has not chnaged
+
+we can use shouldComponentUpdate
+
+shouldComponentUpdate(nextProp, nextState){ 
+	 return this.state.val === nextState.val ? false: true;
+}
+
+we can see both currentProp and nextProp in the console DOM
+
+Using pure component 
+
+I will do class App extends PureComponent {}
+
+pure component does shallow comparison so if currentState and nextState is large nested object. If there is change in one leaf component
+ then top level component will think the component has not changed so it will not render which shoul not be the case
+ 
+
